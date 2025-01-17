@@ -8,7 +8,7 @@ export const tmdbService = {
         `${BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`
       );
       const data = await response.json();
-      return data.results;
+      return data.results.slice(0, 4);
     } catch (error) {
       console.error('Error searching movies:', error);
       return [];
@@ -21,7 +21,7 @@ export const tmdbService = {
         `${BASE_URL}/movie/popular?api_key=${TMDB_API_KEY}`
       );
       const data = await response.json();
-      return data.results;
+      return data.results.slice(0, 4);
     } catch (error) {
       console.error('Error fetching popular movies:', error);
       return [];

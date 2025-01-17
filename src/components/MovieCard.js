@@ -11,9 +11,6 @@ const MovieCard = ({ movie }) => {
       <div className="movie-info">
         <h3>{movie.title}</h3>
         <p>{movie.release_date?.split('-')[0]}</p>
-        <div className="rating">
-          ⭐ {movie.vote_average?.toFixed(1)}
-        </div>
       </div>
     </div>
   );
