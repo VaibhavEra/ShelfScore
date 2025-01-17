@@ -26,5 +26,18 @@ export const tmdbService = {
       console.error('Error fetching popular movies:', error);
       return [];
     }
+  },
+
+  getMovieDetails: async (movieId) => {
+    try {
+      const response = await fetch(
+        `${BASE_URL}/movie/${movieId}?api_key=${TMDB_API_KEY}`
+      );
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching movie details:', error);
+      throw error;
+    }
   }
 }; 
