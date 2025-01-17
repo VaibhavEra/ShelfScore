@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { tmdbService } from '../services/tmdbService';
+import LogMovieForm from './LogMovieForm';
+import '../styles/LogMovieForm.css';
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -8,6 +10,7 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -24,12 +27,34 @@ const MovieDetails = () => {
     fetchMovieDetails();
   }, [id]);
 
+  const handleLogMovie = async (movieData) => {
+    // TODO: Replace with actual API call when backend is ready
+    console.log('Logging movie:', movieData);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Show success message
+    setShowSuccessMessage(true);
+    
+    // Hide success message after 3 seconds
+    setTimeout(() => {
+      setShowSuccessMessage(false);
+    }, 3000);
+  };
+
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error-message">{error}</div>;
   if (!movie) return null;
 
   return (
     <div className="movie-details">
+      {showSuccessMessage && (
+        <div className="success-message">
+          Movie logged successfully!
+        </div>
+      )}
+      
       <button className="back-button" onClick={() => navigate(-1)}>
         ← Back
       </button>
@@ -63,6 +88,8 @@ const MovieDetails = () => {
           </div>
         </div>
       </div>
+      
+      <LogMovieForm movie={movie} onSubmit={handleLogMovie} />
     </div>
   );
 };
