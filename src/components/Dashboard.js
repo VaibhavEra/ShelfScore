@@ -5,55 +5,51 @@ import { tmdbService } from '../services/tmdbService';
 
 const Dashboard = () => {
   const [movies, setMovies] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    loadInitialMovies();
+    loadPopularMovies();
   }, []);
 
-  const loadInitialMovies = async () => {
+  const loadPopularMovies = async () => {
     try {
       const popularMovies = await tmdbService.getPopularMovies();
       setMovies(popularMovies);
+      setLoading(false);
     } catch (err) {
-      setError('Failed to load movies');
-    } finally {
+      setError('Failed to load popular movies');
       setLoading(false);
     }
   };
 
   const handleSearch = async (query) => {
-    setIsSearching(true);
     setLoading(true);
     try {
       const searchResults = await tmdbService.searchMovies(query);
       setMovies(searchResults);
+      setError(null);
     } catch (err) {
       setError('Failed to search movies');
-    } finally {
-      setLoading(false);
     }
+    setLoading(false);
   };
-
-  if (error) {
-    return <div className="error-message">{error}</div>;
-  }
 
   return (
     <div className="dashboard">
       <SearchBar onSearch={handleSearch} />
       
-      <div className="movies-grid">
-        {loading ? (
-          <div className="loading">Loading...</div>
-        ) : (
-          movies.map((movie) => (
+      {error && <div className="error-message">{error}</div>}
+      
+      {loading ? (
+        <div className="loading">Loading...</div>
+      ) : (
+        <div className="movies-grid">
+          {movies.map(movie => (
             <MovieCard key={movie.id} movie={movie} />
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

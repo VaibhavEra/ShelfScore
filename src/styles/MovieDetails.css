@@ -55,16 +55,70 @@
 .tagline {
   font-style: italic;
   color: #666;
-  margin-top: 16px;
+  margin: 16px 0;
+}
+
+.title-container h1 {
+  margin: 0 0 16px 0;
+  font-size: 2.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.title-container .year {
+  font-size: 1.5rem;
+  color: #666;
+  font-weight: normal;
 }
 
 @media (max-width: 768px) {
   .movie-details-content {
     grid-template-columns: 1fr;
   }
-  
+
   .movie-poster-large {
     max-width: 300px;
     margin: 0 auto;
   }
+} 
+.success-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #28a745;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 4px;
+  animation: slideIn 0.3s ease-out;
+  z-index: 1000;
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.genres-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.genre-tag {
+  background-color: #e9ecef;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  color: #495057;
+}
+
+.additional-info p {
+  margin: 12px 0;
 } 
