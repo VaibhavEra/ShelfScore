@@ -1,37 +1,37 @@
-const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 const BASE_URL = 'https://api.themoviedb.org/3';
+const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
 export const tmdbService = {
-  searchMovies: async (query) => {
-    try {
-      const response = await fetch(
-        `${BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`
-      );
-      const data = await response.json();
-      return data.results.slice(0, 4);
-    } catch (error) {
-      console.error('Error searching movies:', error);
-      return [];
-    }
-  },
-
   getPopularMovies: async () => {
     try {
       const response = await fetch(
-        `${BASE_URL}/movie/popular?api_key=${TMDB_API_KEY}`
+        `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
       );
       const data = await response.json();
-      return data.results.slice(0, 4);
+      return data.results.slice(0, 8); // Return 8 movies
     } catch (error) {
       console.error('Error fetching popular movies:', error);
-      return [];
+      throw error;
     }
   },
 
-  getMovieDetails: async (movieId) => {
+  searchMovies: async (query) => {
     try {
       const response = await fetch(
-        `${BASE_URL}/movie/${movieId}?api_key=${TMDB_API_KEY}`
+        `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
+      );
+      const data = await response.json();
+      return data.results.slice(0, 8); // Return 8 search results
+    } catch (error) {
+      console.error('Error searching movies:', error);
+      throw error;
+    }
+  },
+
+  getMovieDetails: async (id) => {
+    try {
+      const response = await fetch(
+        `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`
       );
       const data = await response.json();
       return data;
@@ -39,5 +39,5 @@ export const tmdbService = {
       console.error('Error fetching movie details:', error);
       throw error;
     }
-  }
+  },
 }; 

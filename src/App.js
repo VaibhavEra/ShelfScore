@@ -1,18 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Library from './pages/Library';
+import Dashboard from './components/Dashboard';
 import MovieDetails from './components/MovieDetails';
 import './styles/MovieDetails.css';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Library />} />
+        <Route path="/" element={<Dashboard />} />
         <Route path="/movie/:id" element={<MovieDetails />} />
       </Routes>
     </Router>
   );
-}
+};
 
 export default App; 
