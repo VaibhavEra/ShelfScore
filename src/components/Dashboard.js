@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import SearchBar from './SearchBar';
-import { tmdbService } from '../services/tmdbService';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
+import { tmdbService } from "../services/tmdbService";
 
 const Dashboard = () => {
   const [movies, setMovies] = useState([]);
@@ -15,12 +15,12 @@ const Dashboard = () => {
   const loadPopularMovies = async () => {
     try {
       const popularMovies = await tmdbService.getPopularMovies();
-      console.log('Fetched movies:', popularMovies.length);
+      console.log("Fetched movies:", popularMovies.length);
       setMovies(popularMovies.slice(0, 8)); // Changed to 8 movies
       setLoading(false);
     } catch (err) {
-      console.error('Error loading movies:', err);
-      setError('Failed to load popular movies');
+      console.error("Error loading movies:", err);
+      setError("Failed to load popular movies");
       setLoading(false);
     }
   };
@@ -32,22 +32,24 @@ const Dashboard = () => {
       setMovies(searchResults); // Will get 8 from the service
       setError(null);
     } catch (err) {
-      setError('Failed to search movies');
+      setError("Failed to search movies");
     }
     setLoading(false);
   };
 
-  if (loading) return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center text-white">
-      Loading...
-    </div>
-  );
+  if (loading)
+    return (
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center text-white">
+        Loading...
+      </div>
+    );
 
-  if (error) return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center text-red-500">
-      {error}
-    </div>
-  );
+  if (error)
+    return (
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center text-red-500">
+        {error}
+      </div>
+    );
 
   return (
     <div className="min-h-screen bg-gray-900 text-white font-['Playfair_Display']">
@@ -63,13 +65,13 @@ const Dashboard = () => {
 
         <div className="max-w-[1400px] mx-auto px-4">
           <h2 className="text-2xl font-semibold mb-8 tracking-wide">
-            {movies.length === 8 ? 'Top Search Results' : 'Popular Movies'}
+            {movies.length === 8 ? "Top Search Results" : "Popular Movies"}
           </h2>
-          
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-8">
-            {movies.map(movie => (
-              <Link 
-                key={movie.id} 
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
+            {movies.map((movie) => (
+              <Link
+                key={movie.id}
                 to={`/movie/${movie.id}`}
                 className="group relative transform hover:scale-105 transition-all duration-200"
               >
@@ -79,7 +81,7 @@ const Dashboard = () => {
                       src={
                         movie.poster_path
                           ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                          : '/placeholder-poster.png'
+                          : "/placeholder-poster.png"
                       }
                       alt={movie.title}
                       className="absolute inset-0 w-full h-full object-cover"
@@ -105,4 +107,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard; 
+export default Dashboard;
