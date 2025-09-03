@@ -1,0 +1,508 @@
+{
+  "titleblock": {
+    "alignment": "left",
+    "firstline": {
+      "Title": {
+        "text color": "primary",
+        "size": "h1"
+      },
+      "original-title": {
+        "text color": "secondary",
+        "size": "h2"
+      },
+      "year of release": {
+        "text color": "secondary",
+        "size": "h2",
+        "on hover": "show full date",
+        "seperated from original title with a dot": true
+      },
+      "original-language": {
+        "text color": "secondary",
+        "size": "h2",
+        "seperated from year with a dot": true
+      }
+    },
+    "secondline": {
+      "generes": {
+        "style": "capsules",
+        "text": "primary",
+        "background": "light transparent 15%",
+        "padding": "18px 8px",
+        "gap": "10px",
+        "size": "p"
+      },
+      "running time in mins": {
+        "text": "primary",
+        "size": "p",
+        "on hover": "show time in hours and mins"
+      }
+    }
+  },
+  "PosterBlock": {
+    "structure": "containing the entire width of the page i.e. 1219 with a gap of 26px between poster and backdrop",
+    "poster": {
+      "size": "336x491",
+      "border-radius": "4px"
+    },
+    "backdrop": {
+      "size": "857x489",
+      "border-radius": "4px"
+    }
+  },
+  "metadataBlock": {
+    "structure": "containing the entire width of the page i.e. 1219 with an auto gap between the left and right section",
+    "sections": "left section is the information section and right section are buttons for CTA",
+    "left-section": {
+      "style": {
+        "alignment": "left",
+        "width": "785px",
+        "gap": "15px between category",
+        "category-structure": "left side aligned has category names with secondary text color with h5-bold with dimension of 21px",
+        "content-structure": "content infront of category with sec2 color for some and primary color for some of them, but p in both cases"
+      },
+      "firstline": {
+        "category": "Tagline",
+        "content": "Long Live the fighters",
+        "color": "sec2"
+      },
+      "secondline": {
+        "category": "synopsis",
+        "content": "take the data from the data that I gave you",
+        "color": "primary"
+      },
+      "thirdline": {
+        "category": "Director",
+        "content": "incase of multiple directors seperate them using dots",
+        "color": "sec2"
+      },
+      "fourthline": {
+        "category": "Writers",
+        "content": "incase of multiple writers seperate them using dots",
+        "color": "sec2"
+      }
+    },
+    "right-section": {
+      "style": {
+        "alignment": "right",
+        "button-styles": {
+          "radius": "10px",
+          "padding": "18px 10px",
+          "size": "249x44",
+          "color": "accent-main",
+          "text-color": "121212",
+          "type": "p",
+          "items": "center of the button"
+        }
+      },
+      "first-button": "Add to Watchlist",
+      "second-button": "Watched",
+      "third-button": "Add a Review"
+    }
+  },
+  "castblock": {
+    "structure": "full width i.e. 1219px, comprises of two rows, with a gap of 30px bw those two rows.",
+    "firstrow": {
+      "gap": "auto",
+      "structure": "consists of 2 parts left section and right section",
+      "right": "downward arrow(just an icon)",
+      "left": {
+        "aligned": "left",
+        "gap": "10px bw elements",
+        "contents": {
+          "left": "small vector of main accent color, a dot or higlight to indicate the section",
+          "middle": "text h2 primary color, text=Cast",
+          "right": "See all btn, gap of 10px light transparent 15%, padding 18px 8px, text-p, primary color, arrow icon 24x24 primary color"
+        }
+      }
+    },
+    "secondrow": {
+      "structure": "gap auto, consists of various other card components",
+      "individualCard": {
+        "size": "181x245",
+        "gap": "12px between the image and text",
+        "structure": "consists of image, actor name and character name",
+        "image": "181x181 with 20 radius",
+        "name": "p, FFFFFF color",
+        "character": "p, secondary text color"
+      }
+    }
+  },
+  "imageblock": {
+    "structure": "full width i.e. 1219px, comprises of two rows, with a gap of 30px bw those two rows.",
+    "firstrow": {
+      "gap": "auto",
+      "structure": "consists of 2 parts left section and right section",
+      "right": {
+        "aligned": "right",
+        "spacing": "5px",
+        "icons": "left and right circular icons of size 36x36 with light transparent 15% background, primary color",
+        "working": "the icons need to be functional"
+      },
+      "left": {
+        "aligned": "left",
+        "gap": "10px bw elements",
+        "contents": {
+          "left": "small vector of main accent color, a dot or higlight to indicate the section",
+          "middle": "text h2 primary color, text=Photos",
+          "right": "See all btn, gap of 10px light transparent 15%, padding 18px 8px, text-p, primary color, arrow icon 24x24 primary color"
+        }
+      }
+    },
+    "secondrow": {
+      "structure": "gap 26px, consists of various other card components",
+      "individualCard": {
+        "image": "246x246 with 10 radius"
+      }
+    }
+  },
+  "videoBlock": {
+    "firstrow": "same as cast, crew, and photos",
+    "secondrow": {
+      "structure": "gap of 26 bw individual cards",
+      "individualCard": {
+        "gap": "gap of 10 bw thumbnail & title",
+        "thumbnail": "409x261 and radius of 10",
+        "title": "p, primary color"
+      }
+    }
+  },
+  "watchprovidersblock": {
+    "overall structure": "matches some of the elements as before",
+    "firstrow": "same as cast, crew, photos, video",
+    "secondrow": {
+      "description": "tab for stream, rent, buy and dropdown for country",
+      "structure": "gap auto with 2 sections, 18px corner radius",
+      "padding": "10px 10px",
+      "color": "bg-transparent-5%",
+      "left-section": {
+        "gap": "70px",
+        "tabs": "h5 with text-primary, the tabs are stream, buy, rent",
+        "active tab": "accent main, of 74x46, corner radius of 10, with text as 121212"
+      },
+      "right-section": {
+        "button": "a drop-down to select country",
+        "gap": "10px between Country and down arrow",
+        "structure": "padding of 18 and 8, corner radius of 10",
+        "text": "p with text-secondary",
+        "arrow": "24x24 with primary color"
+      }
+    },
+    "thridRow": {
+      "description": "logos with rates on bottom",
+      "structure": "30 gap, with individual logos and in indiviaul logos gap of 10 between logo and price",
+      "logo": "66x66, 10 corner radius",
+      "price": "p with text-primary"
+    }
+  },
+  "additionalInfoBlock": {
+    "structure": "full width i.e. 1219px, comprises of two rows, with a gap of 30px bw those two rows.",
+    "firstrow": {
+      "gap": "auto",
+      "structure": "consists of 2 parts left section and right section",
+      "right": "downward arrow(just an icon)",
+      "left": {
+        "aligned": "left",
+        "gap": "10px bw elements",
+        "contents": {
+          "left": "small vector of main accent color, a dot or higlight to indicate the section",
+          "right": "text h2 primary color, text=Additional Information"
+        }
+      }
+    },
+    "secondrow": {
+      "structure": "blocks of information, line by line seperated by section divider with a gap of 20 above and below each divider",
+      "blockofinformation": {
+        "gap": "auto between left side category and right side information",
+        "left": "aligned left category, with h5 bold, text-primary color",
+        "right": "p, with text-primary color"
+      },
+      "section-divider": {
+        "width": "full i.e. 1219px as above",
+        "color": "light transparent 15%",
+        "structure": "weight of 2, and rounded from both sides."
+      }
+    }
+  },
+  "backglow": {
+    "structure": "take poster_url from posterData.js",
+    "postion": "it should be placed so that it is displayed behind the hero section somewhat spilling onto the contents below too, we need not worry about the size of the image, does not necessarily need to fit entire image, someof it can overall in the oppossite direction ie. out of the frame of the display",
+    "size": "full height and a width of 1592",
+    "opacity": "50%",
+    "radial fill": "60% from the outside so that it creates a vignette",
+    "blur": "layer blur"
+  },
+  "relatedMoviesBlock": {
+    "structure": "full width i.e. 1219px, comprises of two rows, with a gap of 30px bw those two rows.",
+    "firstrow": {
+      "gap": "auto",
+      "structure": "consists of 2 parts left section and right section",
+      "right": {
+        "aligned": "right",
+        "spacing": "5px",
+        "icons": "left and right circular icons of size 36x36 with light transparent 15% background, primary color",
+        "working": "the icons need to be functional"
+      },
+      "left": {
+        "aligned": "left",
+        "gap": "10px bw elements",
+        "contents": {
+          "left": "small vector of main accent color, a dot or higlight to indicate the section",
+          "right": "text h2 primary color, text=More Like this"
+        }
+      }
+    },
+    "secondrow": {
+      "structure": "gap of auto bw individual cards",
+      "individualCard": {
+        "size": "234w",
+        "gap": "gap of 17 bw elements",
+        "padding": "15px 15px",
+        "color": "light transparent 5%",
+        "corner": "radius of 10",
+        "elements": {
+          "first": "movie poster of size 204w and 321h, 5 corner radius",
+          "second": "width of 204 height of 23, if text overflows make ..., h3, text-primary color",
+          "third": {
+            "structure": "gap of 6, w204, h42",
+            "first": {
+              "structure": "68w 42h, gap of 5, 7 padding from left and right only, elements aligned at center from both axis",
+              "first": "star icon of size 24x24, main accent yellow",
+              "second": "Rating text of color primary, and size h5"
+            },
+            "second": {
+              "structure": "button of 68w 42h, gap of 5, 7 padding from left and right only, elements aligned at center from both axis",
+              "first": "star icon of size 24x24, empty star of text primary color",
+              "second": "'Rate' text of color primary, and size h5"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sidebar": {
+    "structure": "at a position of 1530 on x axis, it remains fixed at that position, meaning the sidebar is visible where ever you are on the page. It consists of 2 elements a scroll bar on the left and the contents on the right. The scrollbar moves according to the section/blocks",
+    "sidebar": {
+      "spacing": "21 between the scrollbar and the contents",
+      "size": "w170 h484, these are not fixed sizes and must be fluid based on the contents actually, but this is for you to build upon for now.[1]",
+      "scrollBar": {
+        "structure": "consists of two elements one is the long scroll and the other is the active tab portion",
+        "longscroll": "height 484, of light transparent 15% color, weight of 4, and rounded at both ends",
+        "active scroll": "height 39, main accent color, weight of 4, rounded at both points, this will shift according to the active section"
+      },
+      "contents": {
+        "structure": "gap of 19 between each section heading, size of 149w and 461h, at a position of 21x and 9y in refernce to the parent, this will be helpful as the contents are not of full height and have somewhat padding of their own. refer to point [1]",
+        "text": "written in text-primary color and h5, the heading we have right now on our page are: Overview, Cast, Crew, Photos, Videos, Watch Providers, Additional Information, Related Movies, Similar Movies, we can then them up."
+      }
+    }
+  },
+  "castModal": {
+    "appearance": {
+      "dimensions": "1448w and 1031h",
+      "color": "background secondary",
+      "corner radius": "20px on top ends 0 on bottoms ends"
+    },
+    "open-close": {
+      "positon": "bottom center",
+      "background": "000000 50% opacity",
+      "animate": "move in from bottom",
+      "ease out": "ease-out",
+      "duration": "300ms"
+    },
+    "design": {
+      "structure": "we will start from top, I will give you relative positions for each element, relative to the modal itself, I will tell you the x and y positions that they are, but you need not hardcode it like so, you can based upon that position code them out like putting them together or not it is totally your decision, analyze the entire design before taking any decisions",
+      "x-button": {
+        "container": "42*42 size, at a position of 25x and 26y",
+        "icon": "padding of 9 and 9, size of 24*24, position center",
+        "color": "text-primary"
+      },
+      "Movie-title": {
+        "position": "90x and 26y meaning same line as the container for x button",
+        "text": "movie name in h2 and text-primary color followed by year in h3 and text-secondary color"
+      },
+      "modal heading or category": {
+        "position": "90x and 74y meaning same line as the movie-title",
+        "text-properties": "h3 with text-primary color",
+        "text": "Full Cast & Crew"
+      },
+      "main-content-area": {
+        "structure": "consists of two sections separated by a section divider, on the left we have the categories and on the right we have the credits",
+        "categories": {
+          "position": "90x and 131y",
+          "gap": "10px gap between each category",
+          "category": {
+            "unselected": "p, text-primary",
+            "selected": {
+              "color": "accent-main",
+              "right-arrow-icon": "box of size of 24*24, icon of size 8w and 4.71h",
+              "gap": "10px between category name and icon"
+            }
+          }
+        },
+        "divider": {
+          "height": "859",
+          "position": "440x and 131y",
+          "color": "light transparent 15%",
+          "weight": "2"
+        },
+        "credits": {
+          "heading": {
+            "content": "heading of the category i.e. cast, production etc.",
+            "text": "h3 and text-primary color",
+            "position": "488x and 131y"
+          },
+          "individual cards": {
+            "position": "488x and 197y",
+            "gap": "20px between each card",
+            "structure": {
+              "gap": "auto between left and right section",
+              "left-section": {
+                "gap": "65",
+                "image": "on left of size 95*95, corner radius of 10.5",
+                "name": "p, text-primary color"
+              },
+              "right-section": {
+                "text": "p with text-primary"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "photosModal": {
+    "appearance": "Same as cast Modal",
+    "open-close": "Same as cast modal",
+    "design": {
+      "structure": "We have headers on top then a row which has buttons on the right and the amount of images displayed on that page, eg. 1-50 of 227, then we have a divider/ seperator, after which we have a grid of images, and at the bottom we have pagination",
+      "header & close button": "Same as cast modal, instead of 'Full Cast & Crew' write Posters, Backdrops & Logos",
+      "buttons": {
+        "gap": "from last element of header in terms of y axis, the gap/ margin is around 32",
+        "individual-buttons": {
+          "gap": "around 23px",
+          "types": "both buttons are drop down",
+          "style": {
+            "button-color": "light-transparent-5%",
+            "gap": "10px between text and icon",
+            "padding": "18px 8px",
+            "corner-radius": "10",
+            "text": "button text: p, text-secondary color, Options: p, text-primary color",
+            "icon": "both buttons have arrow down icon, with text-primary color",
+            "shadow": "inner-shadow"
+          },
+          "button-1": "Photo Type, Options:backdrop, poster, logo",
+          "button-2": "Language, Options: taken from iso_639_1 from data"
+        }
+      },
+      "pageno": {
+        "structure": "right aligned on the same line as the buttons",
+        "text": "p, of text-secondary"
+      },
+      "divider": {
+        "position": "below the buttons, around 23px",
+        "structure": "w1268, weight of 2",
+        "color": "light transparent 15%"
+      },
+      "photo-grid": {
+        "gap": "below the divider, around 23px",
+        "grid": "at once 25 images are shown 5 rows and 5 columns",
+        "gap bw photos": "20hz and 20vt",
+        "individual-photos": "236*236 and have a corner radius of 3"
+      }
+    },
+    "photoOpen": {
+      "hover": "when a photo is hovered highlight it in some way, either zoom it grow it a little bit {exactly like videos}",
+      "clicked": {
+        "modal": "remain same in overall structure, the header portion remains the same except the second heading changes to the photo type",
+        "photoframe": "the size should be fixed, i.e. there should be a maximum size for the photo, but it should also adjust according to the photo type, we also do not want any scroll bar. ",
+        "Photo-gallery-block": {
+          "gap": "around 24px from the photoframe",
+          "heading": "h3, with FFFFFF color",
+          "view all button": {
+            "description": "goes back to show the videos from the same category",
+            "gap": "10px between View All and icon",
+            "padding": "18px-xaxis 8px-yaxis",
+            "text": "p, primary color",
+            "icon": "24x24 primary color",
+            "color": "light transparent 15%",
+            "radius": "10px"
+          },
+          "prev-next-arrows": " they should be on the same line as the view all button but these should be aligned right
+          // <div className="flex items-center gap-[5px]">
+          // <button
+          //   onClick={() => scroll("left")}
+          //   disabled={!canScrollLeft}
+          //   className={`w-[36px] h-[36px] flex items-center justify-center rounded-full transition-colors duration-200 
+          //       ${
+          //         canScrollLeft
+          //           ? "bg-[var(--bg-trans-15)] text-[var(--text-primary)] hover:bg-[var(--bg-trans-60)]"
+          //           : "bg-[var(--bg-trans-5)] text-[var(--text-secondary)] cursor-not-allowed"
+          //       }`}
+          // >
+          ",
+          "similar-photos-grid": {
+            "description": "all the photos from that particular photo type are displayed here, the one displayed is highlighted and the fwd and next in photo frame is also in ref to the grid, it adjusts accoringly",
+            "position": "around 30px below the heading block",
+            "gap": "10px between each card",
+            "individual-card": {
+              "size": "114x71",
+              "radius": "10px",
+              "selected-img": "border of accent-main color of weight 2, inside"
+            }
+          }
+        }
+      }
+    }
+  },
+  "videomodal": {
+    "appearance": "Same as photos Modal",
+    "open-close": "Same as photos modal",
+    "design": {
+      "structure": "same as photos modal",
+      "header & close button": "same as photos modal but instead of 'Posters, Backdrops & Logos' it says Videos",
+      "filter-buttons": "also same as images, but instead here we have video type and sort by, let us keep these non functional for now.",
+      "pageno": "same as photos modal",
+      "divider": "same as photos modal",
+      "video-grid": {
+        "structure": "width of 1267, with a gap of 20 between each individual grid both hz and vt",
+        "individaul card": {
+          "gap": "10px gap between thumbnail and title",
+          "thumbnail": "409x261 and radius of 10",
+          "title": "p, primary color"
+        }
+      }
+    },
+    "videoOpen": {
+      "hover": "when a video is hovered highlight it in some way, either zoom it grow it a little bit, and the title is underlined and turns accent-main color",
+      "clicked": {
+        "modal": "remain same in overall structure, the header portion remains the same except the second heading changes to the video title",
+        "iframe": "with minimal branding if possible according to most updated stds, remove the title also if possible, the size of the iframe should be around 990x557 and centered",
+        "similar-video-block": {
+          "gap": "at a margin/ gap of 50 from the iframe",
+          "heading": {
+            "gap": "10px between the heading and the button",
+            "heading": "h3, with FFFFFF color",
+            "view all button": {
+              "description": "goes back to show the videos from the same category",
+              "gap": "10px between View All and icon",
+              "padding": "18px-xaxis 8px-yaxis",
+              "text": "p, primary color",
+              "icon": "24x24 primary color",
+              "color": "light transparent 15%",
+              "radius": "10px"
+            },
+            "similar-videos-grid": {
+              "description": "only 4 videos are shown from the same category",
+              "positon": "around 24px from the heading",
+              "gap": "20px between each card",
+              "individual-card": {
+                "gap": "10px gap between thumbnail and title",
+                "thumbnail": "302*151 with a radius of 10",
+                "title": "p, primary color"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
