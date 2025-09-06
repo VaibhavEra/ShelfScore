@@ -11,11 +11,46 @@ export default function VideoBlock() {
   const [isVideosModalOpen, setIsVideosModalOpen] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [brokenThumbnails, setBrokenThumbnails] = useState(new Set());
 
   // Video dimensions
   const videoWidth = 409;
   const gap = 26;
   const videoWithGap = videoWidth + gap;
+
+  // Helper function to generate thumbnail URL from key
+  const getThumbnail = (key) =>
+    `https://img.youtube.com/vi/${key}/maxresdefault.jpg`;
+
+  // Function to check if thumbnail is broken (120x90 YouTube placeholder)
+  const checkThumbnailValidity = (imgElement, videoKey) => {
+    if (imgElement.naturalWidth === 120 && imgElement.naturalHeight === 90) {
+      setBrokenThumbnails((prev) => new Set(prev).add(videoKey));
+      return false;
+    }
+    return true;
+  };
+
+  // Function to handle thumbnail load
+  const handleThumbnailLoad = (e, videoKey) => {
+    if (!checkThumbnailValidity(e.target, videoKey)) {
+      e.target.style.display = "none";
+      const fallbackDiv = e.target.nextElementSibling;
+      if (fallbackDiv) {
+        fallbackDiv.classList.remove("hidden");
+      }
+    }
+  };
+
+  // Function to handle thumbnail error
+  const handleThumbnailError = (e, videoKey) => {
+    setBrokenThumbnails((prev) => new Set(prev).add(videoKey));
+    e.target.style.display = "none";
+    const fallbackDiv = e.target.nextElementSibling;
+    if (fallbackDiv) {
+      fallbackDiv.classList.remove("hidden");
+    }
+  };
 
   // Get trailers and teasers data for display
   const trailersAndTeasers = data?.trailers_teasers || [];
@@ -189,22 +224,17 @@ export default function VideoBlock() {
               onClick={() => handleVideoClick(video)}
             >
               <div className="w-[409px] h-[261px] rounded-[10px] overflow-hidden bg-[var(--bg-trans-15)] flex items-center justify-center">
-                {video.thumbnail ? (
-                  <img
-                    src={video.thumbnail}
-                    alt={video.name}
-                    className="w-[409px] h-[261px] rounded-[10px] object-contain bg-black"
-                    style={{ objectPosition: "center" }}
-                    onError={(e) => {
-                      // Remove the img element and show fallback
-                      e.target.style.display = "none";
-                      e.target.nextElementSibling?.classList.remove("hidden");
-                    }}
-                  />
-                ) : null}
+                <img
+                  src={getThumbnail(video.key)}
+                  alt={video.name}
+                  className="w-[409px] h-[261px] rounded-[10px] object-contain bg-black"
+                  style={{ objectPosition: "center" }}
+                  onLoad={(e) => handleThumbnailLoad(e, video.key)}
+                  onError={(e) => handleThumbnailError(e, video.key)}
+                />
                 <div
                   className={`flex items-center justify-center w-full h-full ${
-                    video.thumbnail ? "hidden" : ""
+                    !brokenThumbnails.has(video.key) ? "hidden" : ""
                   }`}
                 >
                   <Youtube size={64} className="text-[var(--text-secondary)]" />

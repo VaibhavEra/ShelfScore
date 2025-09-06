@@ -30,6 +30,10 @@ export default function VideosModal({
   const sortByRef = useRef(null);
   const itemsPerPage = 9;
 
+  // Helper function to generate thumbnail URL from key
+  const getThumbnail = (key) =>
+    `https://img.youtube.com/vi/${key}/maxresdefault.jpg`;
+
   // Function to check if thumbnail is broken (120x90 YouTube placeholder)
   const checkThumbnailValidity = (imgElement, videoKey) => {
     if (imgElement.naturalWidth === 120 && imgElement.naturalHeight === 90) {
@@ -213,11 +217,10 @@ export default function VideosModal({
   const videoTypeOptions = [
     { value: "all", label: "All" },
     { value: "trailers_teasers", label: "Trailers & Teasers" },
-    { value: "clips_openings", label: "Clips & Openings" },
-    {
-      value: "featurettes_bts_bloopers_spots_deleted",
-      label: "Featurettes & Behind the Scenes",
-    },
+    { value: "clips", label: "Clips" },
+    { value: "bts", label: "Behind the Scenes" },
+    { value: "featurettes", label: "Featurettes" },
+    { value: "bloopers", label: "Bloopers" },
     { value: "others", label: "Others" },
   ];
 
@@ -241,14 +244,14 @@ export default function VideosModal({
     switch (selectedSortBy) {
       case "newest":
         return sortedVideos.sort((a, b) => {
-          const dateA = new Date(a.upload_date || "1900-01-01");
-          const dateB = new Date(b.upload_date || "1900-01-01");
+          const dateA = new Date(a.published_date || "1900-01-01");
+          const dateB = new Date(b.published_date || "1900-01-01");
           return dateB - dateA;
         });
       case "oldest":
         return sortedVideos.sort((a, b) => {
-          const dateA = new Date(a.upload_date || "1900-01-01");
-          const dateB = new Date(b.upload_date || "1900-01-01");
+          const dateA = new Date(a.published_date || "1900-01-01");
+          const dateB = new Date(b.published_date || "1900-01-01");
           return dateA - dateB;
         });
       case "name":
@@ -421,28 +424,18 @@ export default function VideosModal({
                             onClick={() => handleVideoClick(video)}
                           >
                             <div className="w-[302px] h-[151px] rounded-[10px] overflow-hidden group-hover:scale-105 transition-transform duration-200 flex items-center justify-center relative">
-                              {video.thumbnail &&
-                              !brokenThumbnails.has(video.key) ? (
-                                <img
-                                  src={video.thumbnail}
-                                  alt={video.name || `Video ${idx + 1}`}
-                                  className="w-full h-full object-contain bg-[var(--bg-primary)]"
-                                  onLoad={(e) =>
-                                    handleThumbnailLoad(e, video.key)
-                                  }
-                                  onError={(e) =>
-                                    handleThumbnailError(e, video.key)
-                                  }
-                                />
-                              ) : null}
-                              <div
-                                className={`flex items-center justify-center w-full h-full bg-[var(--bg-trans-15)] ${
-                                  video.thumbnail &&
-                                  !brokenThumbnails.has(video.key)
-                                    ? "hidden"
-                                    : ""
-                                }`}
-                              >
+                              <img
+                                src={getThumbnail(video.key)}
+                                alt={video.name || `Video ${idx + 1}`}
+                                className="w-full h-full object-contain bg-[var(--bg-primary)]"
+                                onLoad={(e) =>
+                                  handleThumbnailLoad(e, video.key)
+                                }
+                                onError={(e) =>
+                                  handleThumbnailError(e, video.key)
+                                }
+                              />
+                              <div className="hidden flex items-center justify-center w-full h-full bg-[var(--bg-trans-15)]">
                                 <Youtube
                                   size={40}
                                   className="text-[var(--text-secondary)]"
@@ -605,28 +598,18 @@ export default function VideosModal({
                               onClick={() => handleVideoClick(video)}
                             >
                               <div className="w-[409px] h-[261px] rounded-[10px] overflow-hidden group-hover:scale-105 transition-all duration-200 flex items-center justify-center relative">
-                                {video.thumbnail &&
-                                !brokenThumbnails.has(video.key) ? (
-                                  <img
-                                    src={video.thumbnail}
-                                    alt={video.name || `Video ${idx + 1}`}
-                                    className="w-full h-full object-contain bg-black"
-                                    onLoad={(e) =>
-                                      handleThumbnailLoad(e, video.key)
-                                    }
-                                    onError={(e) =>
-                                      handleThumbnailError(e, video.key)
-                                    }
-                                  />
-                                ) : null}
-                                <div
-                                  className={`flex items-center justify-center w-full h-full bg-[var(--bg-trans-15)] ${
-                                    video.thumbnail &&
-                                    !brokenThumbnails.has(video.key)
-                                      ? "hidden"
-                                      : ""
-                                  }`}
-                                >
+                                <img
+                                  src={getThumbnail(video.key)}
+                                  alt={video.name || `Video ${idx + 1}`}
+                                  className="w-full h-full object-contain bg-black"
+                                  onLoad={(e) =>
+                                    handleThumbnailLoad(e, video.key)
+                                  }
+                                  onError={(e) =>
+                                    handleThumbnailError(e, video.key)
+                                  }
+                                />
+                                <div className="hidden flex items-center justify-center w-full h-full bg-[var(--bg-trans-15)]">
                                   <Youtube
                                     size={72}
                                     className="text-[var(--text-secondary)]"
