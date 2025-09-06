@@ -1,6 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  X,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Image,
+  Languages,
+} from "lucide-react";
 import { data } from "../../data/photosdata";
 import PhotoViewer from "./PhotoViewer";
 
@@ -289,10 +296,10 @@ export default function PhotosModal({
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-end justify-center">
-          {/* Backdrop - ALWAYS closes the entire modal */}
+          {/* Backdrop */}
           <motion.div
             className="fixed inset-0 bg-black/50"
-            onClick={onClose} // ✅ Always close the entire modal, regardless of PhotoViewer state
+            onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -330,10 +337,134 @@ export default function PhotosModal({
                       )?.label || "Photo"
                     : "Posters, Backdrops & Logos"}
                 </h3>
+
+                {/* Filters on new line below heading - only show when not in photo viewer */}
+                {!selectedPhoto && (
+                  <div className="flex items-center justify-between mt-3">
+                    {/* Left side - Filters */}
+                    <div className="flex gap-3">
+                      {/* Photo Type */}
+                      <div className="relative" ref={photoTypeRef}>
+                        <button
+                          className="flex items-center gap-2 bg-[var(--bg-trans-15)] px-3 py-1.5 rounded-[8px] shadow-inner text-xs cursor-pointer hover:bg-[var(--accent-main)] transition-colors duration-200 group"
+                          onClick={() => setIsPhotoTypeOpen(!isPhotoTypeOpen)}
+                        >
+                          <Image className="w-3 h-3 group-hover:text-[#121212]" />
+                          <span className="text-[var(--text-primary)] group-hover:text-[#121212]">
+                            Type:
+                          </span>
+                          <span className="text-[var(--text-secondary)] group-hover:text-[#121212]">
+                            {
+                              photoTypeOptions.find(
+                                (opt) => opt.value === selectedPhotoType
+                              )?.label
+                            }
+                          </span>
+                          <motion.div
+                            animate={{ rotate: isPhotoTypeOpen ? 180 : 0 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <ChevronDown className="w-3 h-3 group-hover:text-[#121212]" />
+                          </motion.div>
+                        </button>
+                        <AnimatePresence>
+                          {isPhotoTypeOpen && (
+                            <motion.div
+                              className="absolute top-full left-0 mt-1 bg-[var(--bg-primary)] rounded-[8px] shadow-lg z-20 min-w-full"
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -10 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              {photoTypeOptions.map((option) => (
+                                <button
+                                  key={option.value}
+                                  className={`w-full text-left px-3 py-1.5 text-xs first:rounded-t-[8px] last:rounded-b-[8px] transition-colors duration-200 ${
+                                    selectedPhotoType === option.value
+                                      ? "bg-[var(--accent-main)] text-[#121212]"
+                                      : "text-[var(--text-primary)] hover:bg-[var(--bg-trans-15)]"
+                                  }`}
+                                  onClick={() =>
+                                    handleFilterChange(
+                                      "photoType",
+                                      option.value
+                                    )
+                                  }
+                                >
+                                  {option.label}
+                                </button>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+
+                      {/* Language */}
+                      <div className="relative" ref={languageRef}>
+                        <button
+                          className="flex items-center gap-2 bg-[var(--bg-trans-15)] px-3 py-1.5 rounded-[8px] shadow-inner text-xs cursor-pointer hover:bg-[var(--accent-main)] transition-colors duration-200 group"
+                          onClick={() => setIsLanguageOpen(!isLanguageOpen)}
+                        >
+                          <Languages className="w-3 h-3 group-hover:text-[#121212]" />
+                          <span className="text-[var(--text-primary)] group-hover:text-[#121212]">
+                            Lang:
+                          </span>
+                          <span className="text-[var(--text-secondary)] group-hover:text-[#121212]">
+                            {
+                              languageOptions.find(
+                                (opt) => opt.value === selectedLanguage
+                              )?.label
+                            }
+                          </span>
+                          <motion.div
+                            animate={{ rotate: isLanguageOpen ? 180 : 0 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <ChevronDown className="w-3 h-3 group-hover:text-[#121212]" />
+                          </motion.div>
+                        </button>
+                        <AnimatePresence>
+                          {isLanguageOpen && (
+                            <motion.div
+                              className="absolute top-full left-0 mt-1 bg-[var(--bg-primary)] rounded-[8px] shadow-lg z-20 min-w-full max-h-48 overflow-y-auto"
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -10 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              {languageOptions.map((option) => (
+                                <button
+                                  key={option.value}
+                                  className={`w-full text-left px-3 py-1.5 text-xs first:rounded-t-[8px] last:rounded-b-[8px] transition-colors duration-200 ${
+                                    selectedLanguage === option.value
+                                      ? "bg-[var(--accent-main)] text-[#121212]"
+                                      : "text-[var(--text-primary)] hover:bg-[var(--bg-trans-15)]"
+                                  }`}
+                                  onClick={() =>
+                                    handleFilterChange("language", option.value)
+                                  }
+                                >
+                                  {option.label}
+                                </button>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    </div>
+
+                    {/* Right side - Results Counter */}
+                    <div className="text-[var(--text-secondary)] text-sm">
+                      {totalItems > 0
+                        ? `${startIndex + 1}-${endIndex} of ${totalItems}`
+                        : "0 of 0"}
+                    </div>
+                  </div>
+                )}
               </div>
               <button
-                className="w-[42px] h-[42px] rounded-[10px] flex items-center justify-center text-[var(--text-primary)] p-2 flex-shrink-0 hover:cursor-pointer hover:bg-white/10 transition-all duration-200"
-                onClick={onClose} // ✅ Always close the entire modal, regardless of PhotoViewer state
+                className="w-[42px] h-[42px] rounded-[10px] flex items-center justify-center text-[var(--text-primary)] p-2 flex-shrink-0 hover:cursor-pointer hover:bg-[var(--bg-trans-15)] transition-all duration-200"
+                onClick={onClose}
               >
                 <X className="w-6 h-6" />
               </button>
@@ -357,127 +488,8 @@ export default function PhotosModal({
               ) : (
                 /* Photo Grid View */
                 <>
-                  {/* Controls */}
-                  <div className="flex items-center justify-between mt-8 mb-6 px-6">
-                    <div className="flex gap-6">
-                      {/* Photo Type */}
-                      <div className="relative" ref={photoTypeRef}>
-                        <button
-                          className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-[10px] shadow-inner text-sm"
-                          onClick={() => setIsPhotoTypeOpen(!isPhotoTypeOpen)}
-                        >
-                          <span className="text-[var(--text-secondary)]">
-                            Photo Type:
-                          </span>
-                          <span className="text-[var(--text-primary)]">
-                            {
-                              photoTypeOptions.find(
-                                (opt) => opt.value === selectedPhotoType
-                              )?.label
-                            }
-                          </span>
-                          <motion.div
-                            animate={{ rotate: isPhotoTypeOpen ? 180 : 0 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            <ChevronDown className="w-4 h-4 text-[var(--text-primary)]" />
-                          </motion.div>
-                        </button>
-                        <AnimatePresence>
-                          {isPhotoTypeOpen && (
-                            <motion.div
-                              className="absolute top-full left-0 mt-1 bg-[var(--bg-secondary)] border border-white/15 rounded-[10px] shadow-lg z-10 min-w-full"
-                              initial={{ opacity: 0, y: -10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: -10 }}
-                              transition={{ duration: 0.2 }}
-                            >
-                              {photoTypeOptions.map((option) => (
-                                <button
-                                  key={option.value}
-                                  className={`w-full text-left px-4 py-2 text-sm hover:bg-white/5 first:rounded-t-[10px] last:rounded-b-[10px] ${
-                                    selectedPhotoType === option.value
-                                      ? "bg-[var(--accent-main)] text-white"
-                                      : "text-[var(--text-primary)]"
-                                  }`}
-                                  onClick={() =>
-                                    handleFilterChange(
-                                      "photoType",
-                                      option.value
-                                    )
-                                  }
-                                >
-                                  {option.label}
-                                </button>
-                              ))}
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-
-                      {/* Language */}
-                      <div className="relative" ref={languageRef}>
-                        <button
-                          className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-[10px] shadow-inner text-sm"
-                          onClick={() => setIsLanguageOpen(!isLanguageOpen)}
-                        >
-                          <span className="text-[var(--text-secondary)]">
-                            Language:
-                          </span>
-                          <span className="text-[var(--text-primary)]">
-                            {
-                              languageOptions.find(
-                                (opt) => opt.value === selectedLanguage
-                              )?.label
-                            }
-                          </span>
-                          <motion.div
-                            animate={{ rotate: isLanguageOpen ? 180 : 0 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            <ChevronDown className="w-4 h-4 text-[var(--text-primary)]" />
-                          </motion.div>
-                        </button>
-                        <AnimatePresence>
-                          {isLanguageOpen && (
-                            <motion.div
-                              className="absolute top-full left-0 mt-1 bg-[var(--bg-secondary)] border border-white/15 rounded-[10px] shadow-lg z-10 min-w-full max-h-60 overflow-y-auto"
-                              initial={{ opacity: 0, y: -10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: -10 }}
-                              transition={{ duration: 0.2 }}
-                            >
-                              {languageOptions.map((option) => (
-                                <button
-                                  key={option.value}
-                                  className={`w-full text-left px-4 py-2 text-sm hover:bg-white/5 first:rounded-t-[10px] last:rounded-b-[10px] ${
-                                    selectedLanguage === option.value
-                                      ? "bg-[var(--accent-main)] text-white"
-                                      : "text-[var(--text-primary)]"
-                                  }`}
-                                  onClick={() =>
-                                    handleFilterChange("language", option.value)
-                                  }
-                                >
-                                  {option.label}
-                                </button>
-                              ))}
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    </div>
-
-                    {/* Info */}
-                    <div className="text-[var(--text-secondary)] text-sm">
-                      {totalItems > 0
-                        ? `${startIndex + 1}-${endIndex} of ${totalItems}`
-                        : "0 of 0"}
-                    </div>
-                  </div>
-
                   {/* Grid */}
-                  <div className="w-[1267px] mx-auto mb-8 mt-6">
+                  <div className="w-[1267px] mx-auto mb-8 mt-8">
                     <AnimatePresence mode="wait">
                       {currentPhotos.length > 0 ? (
                         <motion.div
@@ -536,7 +548,7 @@ export default function PhotosModal({
                     </AnimatePresence>
                   </div>
 
-                  {/* Pagination */}
+                  {/* Pagination - centered without results counter */}
                   {totalPages > 1 && (
                     <div className="flex items-center justify-center gap-2 pb-8 px-6">
                       {/* Prev */}
@@ -547,7 +559,7 @@ export default function PhotosModal({
                         disabled={validCurrentPage === 1 || isAnimating}
                         className={`w-[36px] h-[36px] flex items-center justify-center rounded-full transition-colors duration-200 ${
                           validCurrentPage > 1 && !isAnimating
-                            ? "bg-[var(--bg-trans-15)] text-[var(--text-primary)] hover:bg-[var(--bg-trans-60)]"
+                            ? "bg-[var(--bg-trans-15)] text-[var(--text-primary)] hover:bg-[var(--bg-trans-60)] cursor-pointer"
                             : "bg-[var(--bg-trans-5)] text-[var(--text-secondary)] cursor-not-allowed"
                         }`}
                       >
@@ -570,8 +582,8 @@ export default function PhotosModal({
                             disabled={isAnimating}
                             className={`w-[36px] h-[36px] flex items-center justify-center rounded-full transition-colors duration-200 ${
                               validCurrentPage === page
-                                ? "bg-[var(--accent-main)] text-white"
-                                : "bg-[var(--bg-trans-15)] text-[var(--text-primary)] hover:bg-[var(--bg-trans-60)]"
+                                ? "bg-[var(--accent-main)] text-[#121212]"
+                                : "bg-[var(--bg-trans-15)] text-[var(--text-primary)] hover:bg-[var(--bg-trans-60)] cursor-pointer"
                             } ${
                               isAnimating ? "cursor-not-allowed opacity-50" : ""
                             }`}
@@ -591,7 +603,7 @@ export default function PhotosModal({
                         }
                         className={`w-[36px] h-[36px] flex items-center justify-center rounded-full transition-colors duration-200 ${
                           validCurrentPage < totalPages && !isAnimating
-                            ? "bg-[var(--bg-trans-15)] text-[var(--text-primary)] hover:bg-[var(--bg-trans-60)]"
+                            ? "bg-[var(--bg-trans-15)] text-[var(--text-primary)] hover:bg-[var(--bg-trans-60)] cursor-pointer"
                             : "bg-[var(--bg-trans-5)] text-[var(--text-secondary)] cursor-not-allowed"
                         }`}
                       >
