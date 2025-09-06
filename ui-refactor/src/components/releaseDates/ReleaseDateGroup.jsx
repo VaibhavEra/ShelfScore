@@ -18,7 +18,7 @@ export default function ReleaseDateGroup({
   const releaseCount = releases.length;
 
   // Get unique countries for collapsed preview
-  const uniqueCountries = [...new Set(releases.map((r) => r.country_code))];
+  const uniqueCountries = [...new Set(releases.map((r) => r.iso_3166_1))];
 
   // Country Flag component
   const CountryFlag = ({ countryCode, size = "sm" }) => {
@@ -129,15 +129,15 @@ export default function ReleaseDateGroup({
             <div className="flex flex-wrap gap-[12px] px-[16px]">
               {releases.map((release, index) => (
                 <div
-                  key={`${release.country_code}-${index}`}
+                  key={`${release.iso_3166_1}-${index}`}
                   className="bg-[var(--bg-trans-15)] rounded-[8px] p-[12px] flex items-center gap-[10px] w-auto min-w-fit"
                 >
-                  <CountryFlag countryCode={release.country_code} size="lg" />
+                  <CountryFlag countryCode={release.iso_3166_1} size="lg" />
 
                   <div className="flex items-center gap-[6px] text-sm whitespace-nowrap">
                     {/* Country Name */}
                     <span className="text-[var(--text-primary)] font-medium">
-                      {getCountryName(release.country_code)}
+                      {getCountryName(release.iso_3166_1)}
                     </span>
 
                     {/* Certification */}

@@ -51,7 +51,7 @@ export default function ReleaseDatesBlock({ releaseData }) {
   // Get available countries for current tab
   const availableCountries = useMemo(() => {
     const releases = releaseData[activeTab] || [];
-    return [...new Set(releases.map((r) => r.country_code))];
+    return [...new Set(releases.map((r) => r.iso_3166_1))];
   }, [releaseData, activeTab]);
 
   // Calculate position for active tab indicator
@@ -121,7 +121,7 @@ export default function ReleaseDatesBlock({ releaseData }) {
   const groupReleasesByCountry = (releases) => {
     const groupedReleases = {};
     releases.forEach((release) => {
-      const countryCode = release.country_code;
+      const countryCode = release.iso_3166_1;
       if (!groupedReleases[countryCode]) {
         groupedReleases[countryCode] = [];
       }
@@ -150,7 +150,7 @@ export default function ReleaseDatesBlock({ releaseData }) {
     let filtered = releases;
     if (selectedCountries.length > 0) {
       filtered = filtered.filter((release) =>
-        selectedCountries.includes(release.country_code)
+        selectedCountries.includes(release.iso_3166_1)
       );
     }
 
