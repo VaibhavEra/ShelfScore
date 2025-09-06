@@ -1,22 +1,49 @@
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Globe, Film } from "lucide-react";
 import { movieData } from "../../data/movieDetails";
 
 export default function AdditionalInformationBlock() {
   const [open, setOpen] = useState(true);
 
+  // Platform icons mapping
+  const getPlatformIcon = (platform) => {
+    const platformLower = platform.toLowerCase();
+    if (platformLower.includes("imdb")) {
+      return <Film size={16} className="text-yellow-500" />;
+    } else if (platformLower.includes("tmdb")) {
+      return <Globe size={16} className="text-blue-500" />;
+    } else if (platformLower.includes("homepage")) {
+      return <Globe size={16} className="text-green-500" />;
+    }
+    return <Globe size={16} className="text-[var(--text-secondary)]" />;
+  };
+
   const infoItems = [
     {
-      label: "Production Companies",
-      value: movieData.additional.production_companies.join(", "),
+      label: "Status",
+      value: movieData.additional.status,
     },
     {
-      label: "Production Country",
+      label: "Production Companies",
+      value: movieData.additional.production_companies
+        .map((company) => company.name)
+        .join(", "),
+    },
+    {
+      label: "Origin Country",
       value: movieData.additional.origin_country.join(", "),
     },
     {
+      label: "Production Country",
+      value: movieData.additional.production_countries
+        .map((country) => country.name)
+        .join(", "),
+    },
+    {
       label: "Spoken Languages",
-      value: movieData.additional.spoken_languages.join(", "),
+      value: movieData.additional.spoken_languages
+        .map((language) => language.english_name)
+        .join(", "),
     },
     {
       label: "Primary Language",
@@ -29,6 +56,52 @@ export default function AdditionalInformationBlock() {
     {
       label: "Revenue",
       value: `$${movieData.financial.revenue.toLocaleString()}`,
+    },
+    {
+      label: "Platforms",
+      value: (
+        <div className="flex items-center gap-3">
+          {movieData.platforms.imdb_id && (
+            <div className="flex items-center gap-2">
+              {getPlatformIcon("imdb")}
+              <a
+                href={`https://www.imdb.com/title/${movieData.platforms.imdb_id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--text-primary)] hover:text-[var(--accent-main)] transition-colors"
+              >
+                IMDb
+              </a>
+            </div>
+          )}
+          {movieData.platforms.tmdb_id && (
+            <div className="flex items-center gap-2">
+              {getPlatformIcon("tmdb")}
+              <a
+                href={`https://www.themoviedb.org/movie/${movieData.platforms.tmdb_id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--text-primary)] hover:text-[var(--accent-main)] transition-colors"
+              >
+                TMDB
+              </a>
+            </div>
+          )}
+          {movieData.platforms.homepage && (
+            <div className="flex items-center gap-2">
+              {getPlatformIcon("homepage")}
+              <a
+                href={movieData.platforms.homepage}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--text-primary)] hover:text-[var(--accent-main)] transition-colors"
+              >
+                Official Site
+              </a>
+            </div>
+          )}
+        </div>
+      ),
     },
   ];
 
@@ -77,9 +150,13 @@ export default function AdditionalInformationBlock() {
                 </div>
                 {/* Right side aligned fully right */}
                 <div className="flex-1 flex justify-start items-center">
-                  <p className="text-[var(--text-primary)] text-right">
-                    {item.value}
-                  </p>
+                  {typeof item.value === "string" ? (
+                    <p className="text-[var(--text-primary)] text-right">
+                      {item.value}
+                    </p>
+                  ) : (
+                    item.value
+                  )}
                 </div>
               </div>
 
