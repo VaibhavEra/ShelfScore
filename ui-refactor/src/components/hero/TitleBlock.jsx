@@ -89,10 +89,10 @@ export default function TitleBlock() {
       <ul className="flex flex-wrap items-center gap-3 mt-4" role="list">
         {movieData.primary.genres.map((genre) => (
           <li
-            key={genre}
+            key={genre.id}
             className="bg-[var(--bg-trans-15)] text-[var(--text-primary)] rounded-full px-[18px] py-[8px] text-[16px] leading-[1.75]"
           >
-            {genre}
+            {genre.name}
           </li>
         ))}
 
