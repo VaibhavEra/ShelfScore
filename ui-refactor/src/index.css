@@ -108,3 +108,70 @@
 .custom-scroll::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.35);
 }
+
+/* src/index.css */
+
+/* Your existing styles... */
+
+/* custom scroll bar for cast modal */
+.custom-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* ADD THIS NEW SECTION - Custom scrollbar for dropdown */
+.dropdown-scrollbar {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent; /* thumb, track */
+}
+
+.dropdown-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dropdown-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dropdown-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.dropdown-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* Language dropdown specific improvements */
+.language-dropdown-container {
+  min-width: 320px;
+  max-width: 400px;
+}
+
+.language-dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.language-dropdown-item .language-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 8px;
+}
+
+.language-dropdown-item .language-count {
+  flex-shrink: 0;
+}
