@@ -23,6 +23,11 @@
   --bg-trans-15: hsla(0, 0%, 64%, 0.15);
   --bg-trans-5: hsla(0, 0%, 64%, 0.05);
   --bg-trans-60: hsla(0, 0%, 64%, 0.6);
+
+  /* Dropdown-specific colors */
+  --dropdown-bg: hsl(0, 0%, 8%); /* Slightly lighter than bg-primary */
+  --dropdown-hover: hsl(0, 0%, 20%); /* More pronounced hover state */
+  --dropdown-selected: var(--accent-main); /* Use your accent color */
 }
 
 /* 3. Base Styles */
@@ -38,8 +43,6 @@
   }
 
   body {
-    @apply bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans;
-    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
     /* Remove scrollbar from body */
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
@@ -149,29 +152,4 @@
 
 .dropdown-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.35);
-}
-
-/* Language dropdown specific improvements */
-.language-dropdown-container {
-  min-width: 320px;
-  max-width: 400px;
-}
-
-.language-dropdown-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  white-space: nowrap;
-}
-
-.language-dropdown-item .language-label {
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-right: 8px;
-}
-
-.language-dropdown-item .language-count {
-  flex-shrink: 0;
 }
