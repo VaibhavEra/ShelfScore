@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { data } from "../../data/videodata";
-import { ChevronRight, ChevronLeft, Youtube } from "lucide-react";
+import { ChevronRight, ChevronLeft, ImageOff } from "lucide-react";
 import VideoModal from "./VideoModal";
+import { YouTubeThumbnail } from "./YouTubeThumbnail";
 
 export default function VideoBlock() {
   const scrollRef = useRef(null);
@@ -11,46 +12,11 @@ export default function VideoBlock() {
   const [isVideosModalOpen, setIsVideosModalOpen] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const [brokenThumbnails, setBrokenThumbnails] = useState(new Set());
 
   // Video dimensions
   const videoWidth = 409;
   const gap = 26;
   const videoWithGap = videoWidth + gap;
-
-  // Helper function to generate thumbnail URL from key
-  const getThumbnail = (key) =>
-    `https://img.youtube.com/vi/${key}/maxresdefault.jpg`;
-
-  // Function to check if thumbnail is broken (120x90 YouTube placeholder)
-  const checkThumbnailValidity = (imgElement, videoKey) => {
-    if (imgElement.naturalWidth === 120 && imgElement.naturalHeight === 90) {
-      setBrokenThumbnails((prev) => new Set(prev).add(videoKey));
-      return false;
-    }
-    return true;
-  };
-
-  // Function to handle thumbnail load
-  const handleThumbnailLoad = (e, videoKey) => {
-    if (!checkThumbnailValidity(e.target, videoKey)) {
-      e.target.style.display = "none";
-      const fallbackDiv = e.target.nextElementSibling;
-      if (fallbackDiv) {
-        fallbackDiv.classList.remove("hidden");
-      }
-    }
-  };
-
-  // Function to handle thumbnail error
-  const handleThumbnailError = (e, videoKey) => {
-    setBrokenThumbnails((prev) => new Set(prev).add(videoKey));
-    e.target.style.display = "none";
-    const fallbackDiv = e.target.nextElementSibling;
-    if (fallbackDiv) {
-      fallbackDiv.classList.remove("hidden");
-    }
-  };
 
   // Get trailers and teasers data for display
   const trailersAndTeasers = data?.trailers_teasers || [];
@@ -224,21 +190,14 @@ export default function VideoBlock() {
               onClick={() => handleVideoClick(video)}
             >
               <div className="w-[409px] h-[261px] rounded-[10px] overflow-hidden bg-[var(--bg-trans-15)] flex items-center justify-center">
-                <img
-                  src={getThumbnail(video.key)}
+                <YouTubeThumbnail
+                  videoKey={video.key}
                   alt={video.name}
                   className="w-[409px] h-[261px] rounded-[10px] object-contain bg-black"
-                  style={{ objectPosition: "center" }}
-                  onLoad={(e) => handleThumbnailLoad(e, video.key)}
-                  onError={(e) => handleThumbnailError(e, video.key)}
+                  containerClassName="w-full h-full"
+                  fallbackIcon={ImageOff}
+                  fallbackIconSize={64}
                 />
-                <div
-                  className={`flex items-center justify-center w-full h-full ${
-                    !brokenThumbnails.has(video.key) ? "hidden" : ""
-                  }`}
-                >
-                  <Youtube size={64} className="text-[var(--text-secondary)]" />
-                </div>
               </div>
               <div className="h-[10px]" />
               <p className="text-[var(--text-primary)] text-[16px] leading-[1.5] font-medium group-hover:underline group-hover:text-[var(--accent-main)] transition-colors duration-200">
