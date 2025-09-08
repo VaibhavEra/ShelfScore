@@ -70,7 +70,8 @@ export default function PhotosModal({
   useEffect(() => {
     if (isOpen) {
       setSelectedPhotoType("backdrops");
-      setSelectedLanguage("all");
+      // Set default language based on photo type - backdrops default to "no-language"
+      setSelectedLanguage("no-language");
       setCurrentPage(1);
       setIsPhotoTypeOpen(false);
       setIsLanguageOpen(false);
@@ -183,9 +184,35 @@ export default function PhotosModal({
     setSelectedPhotoType(newPhotoType);
     setIsPhotoTypeOpen(false);
 
-    // Reset language to "all" if current language doesn't exist in new type
+    // Set language based on photo type and current language availability
     if (!currentLanguageExists) {
-      setSelectedLanguage("all");
+      // If current language doesn't exist in new type, set defaults
+      if (newPhotoType === "backdrops") {
+        setSelectedLanguage("no-language");
+      } else {
+        setSelectedLanguage("all");
+      }
+    } else {
+      // If switching TO backdrops and current language is "all", change to "no-language"
+      if (newPhotoType === "backdrops" && selectedLanguage === "all") {
+        setSelectedLanguage("no-language");
+      }
+      // If switching FROM backdrops and current language is "no-language", change to "all"
+      else if (
+        newPhotoType !== "backdrops" &&
+        selectedLanguage === "no-language"
+      ) {
+        // Only change if "no-language" doesn't exist in the new type
+        const newTypeData = data?.[newPhotoType];
+        if (Array.isArray(newTypeData)) {
+          const hasNoLanguageItems = newTypeData.some(
+            (photo) => !photo.iso_639_1 || photo.iso_639_1.trim() === ""
+          );
+          if (!hasNoLanguageItems) {
+            setSelectedLanguage("all");
+          }
+        }
+      }
     }
 
     setCurrentPage(1);
@@ -463,11 +490,11 @@ export default function PhotosModal({
                           className="flex items-center gap-2 bg-[var(--bg-trans-15)] px-4 py-2.5 rounded-[8px] shadow-inner text-sm cursor-pointer hover:bg-[var(--accent-main)] transition-colors duration-200 group"
                           onClick={() => setIsPhotoTypeOpen(!isPhotoTypeOpen)}
                         >
-                          <Image className="w-4 h-4 group-hover:text-[#121212]" />
-                          <span className="text-[var(--text-primary)] group-hover:text-[#121212]">
+                          <Image className="w-4 h-4 text-[var(--text-secondary)] group-hover:text-[#121212]" />
+                          <span className="text-[var(--text-secondary)] group-hover:text-[#121212]">
                             Type:
                           </span>
-                          <span className="text-[var(--text-secondary)] group-hover:text-[#121212]">
+                          <span className="text-[var(--text-primary)] group-hover:text-[#121212]">
                             {
                               photoTypeOptions.find(
                                 (opt) => opt.value === selectedPhotoType
@@ -485,13 +512,13 @@ export default function PhotosModal({
                             animate={{ rotate: isPhotoTypeOpen ? 180 : 0 }}
                             transition={{ duration: 0.2 }}
                           >
-                            <ChevronDown className="w-4 h-4 group-hover:text-[#121212]" />
+                            <ChevronDown className="w-4 h-4 text-[var(--text-secondary)] group-hover:text-[#121212]" />
                           </motion.div>
                         </button>
                         <AnimatePresence>
                           {isPhotoTypeOpen && (
                             <motion.div
-                              className="absolute top-full left-0 mt-1 bg-[var(--bg-primary)] rounded-[8px] shadow-lg z-20 min-w-full"
+                              className="absolute top-full left-0 mt-1 bg-[var(--dropdown-bg)] border border-white/15 rounded-[8px] shadow-lg z-20 min-w-full"
                               initial={{ opacity: 0, y: -10 }}
                               animate={{ opacity: 1, y: 0 }}
                               exit={{ opacity: 0, y: -10 }}
@@ -505,8 +532,8 @@ export default function PhotosModal({
                                     key={option.value}
                                     className={`w-full text-left px-4 py-2.5 text-sm cursor-pointer first:rounded-t-[8px] last:rounded-b-[8px] transition-colors duration-200 flex justify-between items-center group ${
                                       isSelected
-                                        ? "bg-[var(--accent-main)] text-[#121212]"
-                                        : "text-[var(--text-primary)] hover:bg-[var(--bg-trans-15)]"
+                                        ? "bg-[var(--dropdown-selected)] text-[#121212]"
+                                        : "text-[var(--text-primary)] hover:bg-[var(--dropdown-hover)]"
                                     }`}
                                     onClick={() =>
                                       handleFilterChange(
@@ -520,7 +547,7 @@ export default function PhotosModal({
                                       className={`text-xs px-1.5 py-0.5 rounded-md transition-colors duration-200 font-medium min-w-[24px] text-center ${
                                         isSelected
                                           ? "bg-[#121212]/20 text-[#121212]"
-                                          : "bg-white/5 text-[var(--text-secondary)] group-hover:bg-[var(--accent-main)]/10 group-hover:text-[var(--accent-main)]"
+                                          : "bg-white/5 text-[var(--text-secondary)] group-hover:bg-white/10 group-hover:text-[var(--text-primary)]"
                                       }`}
                                     >
                                       {option.count}
@@ -536,14 +563,14 @@ export default function PhotosModal({
                       {/* Language */}
                       <div className="relative" ref={languageRef}>
                         <button
-                          className="flex items-center gap-2 bg-[var(--bg-trans-15)] px-4 py-2.5 rounded-[8px] shadow-inner text-sm cursor-pointer hover:bg-[var(--accent-main)] transition-colors duration-200 group language-dropdown-container"
+                          className="flex items-center gap-2 bg-[var(--bg-trans-15)] px-4 py-2.5 rounded-[8px] shadow-inner text-sm cursor-pointer hover:bg-[var(--accent-main)] transition-colors duration-200 group"
                           onClick={() => setIsLanguageOpen(!isLanguageOpen)}
                         >
-                          <Languages className="w-4 h-4 group-hover:text-[#121212] flex-shrink-0" />
-                          <span className="text-[var(--text-primary)] group-hover:text-[#121212] flex-shrink-0">
+                          <Languages className="w-4 h-4 text-[var(--text-secondary)] group-hover:text-[#121212] flex-shrink-0" />
+                          <span className="text-[var(--text-secondary)] group-hover:text-[#121212] flex-shrink-0">
                             Language:
                           </span>
-                          <span className="text-[var(--text-secondary)] group-hover:text-[#121212] truncate flex-1 text-left">
+                          <span className="text-[var(--text-primary)] group-hover:text-[#121212] whitespace-nowrap">
                             {getCurrentLanguageLabel()}
                           </span>
                           <motion.div
@@ -551,13 +578,13 @@ export default function PhotosModal({
                             transition={{ duration: 0.2 }}
                             className="flex-shrink-0"
                           >
-                            <ChevronDown className="w-4 h-4 group-hover:text-[#121212]" />
+                            <ChevronDown className="w-4 h-4 text-[var(--text-secondary)] group-hover:text-[#121212]" />
                           </motion.div>
                         </button>
                         <AnimatePresence>
                           {isLanguageOpen && (
                             <motion.div
-                              className="absolute top-full left-0 mt-1 bg-[var(--bg-primary)] rounded-[8px] shadow-lg z-20 language-dropdown-container max-h-60 overflow-y-auto dropdown-scrollbar"
+                              className="absolute top-full left-0 mt-1 bg-[var(--dropdown-bg)] border border-white/15 rounded-[8px] shadow-lg z-20 w-full max-h-60 overflow-y-auto dropdown-scrollbar"
                               initial={{ opacity: 0, y: -10 }}
                               animate={{ opacity: 1, y: 0 }}
                               exit={{ opacity: 0, y: -10 }}
@@ -566,23 +593,26 @@ export default function PhotosModal({
                               {languageOptions.map((option) => (
                                 <button
                                   key={option.value}
-                                  className={`w-full text-left px-4 py-2.5 text-sm cursor-pointer first:rounded-t-[8px] last:rounded-b-[8px] transition-colors duration-200 language-dropdown-item group ${
+                                  className={`w-full text-left px-4 py-2.5 text-sm cursor-pointer first:rounded-t-[8px] last:rounded-b-[8px] transition-colors duration-200 flex justify-between items-center group ${
                                     selectedLanguage === option.value
-                                      ? "bg-[var(--accent-main)] text-[#121212]"
-                                      : "text-[var(--text-primary)] hover:bg-[var(--bg-trans-15)]"
+                                      ? "bg-[var(--dropdown-selected)] text-[#121212]"
+                                      : "text-[var(--text-primary)] hover:bg-[var(--dropdown-hover)]"
                                   }`}
                                   onClick={() =>
                                     handleFilterChange("language", option.value)
                                   }
                                 >
-                                  <span className="language-label">
+                                  <span
+                                    className="truncate flex-1 min-w-0 pr-2"
+                                    title={option.label}
+                                  >
                                     {option.label}
                                   </span>
                                   <span
-                                    className={`text-xs px-1.5 py-0.5 rounded-md transition-colors duration-200 font-medium min-w-[24px] text-center language-count ${
+                                    className={`text-xs px-1.5 py-0.5 rounded-md transition-colors duration-200 font-medium min-w-[24px] text-center flex-shrink-0 ${
                                       selectedLanguage === option.value
                                         ? "bg-[#121212]/20 text-[#121212]"
-                                        : "bg-white/5 text-[var(--text-secondary)] group-hover:bg-[var(--accent-main)]/10 group-hover:text-[var(--accent-main)]"
+                                        : "bg-white/5 text-[var(--text-secondary)] group-hover:bg-white/10 group-hover:text-[var(--text-primary)]"
                                     }`}
                                   >
                                     {getLanguageCount(option.value)}
