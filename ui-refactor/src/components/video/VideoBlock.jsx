@@ -203,9 +203,28 @@ export default function VideoBlock() {
               <p className="text-[var(--text-primary)] text-[16px] leading-[1.5] font-medium group-hover:underline group-hover:text-[var(--accent-main)] transition-colors duration-200">
                 {video.name}
               </p>
-              <p className="text-[var(--text-secondary)] text-[14px] leading-[1.5] mt-[2px]">
-                {video.type || "Trailer"}
-              </p>
+              <div className="flex items-center gap-2 mt-[2px]">
+                <p className="text-[var(--text-secondary)] text-[14px] leading-[1.5]">
+                  {video.type || "Trailer"}
+                </p>
+                {video.published_date && (
+                  <>
+                    <span className="text-[var(--text-secondary)] text-[14px]">
+                      •
+                    </span>
+                    <p className="text-[var(--text-secondary)] text-[14px] leading-[1.5]">
+                      {new Date(video.published_date).toLocaleDateString(
+                        "en-US",
+                        {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        }
+                      )}
+                    </p>
+                  </>
+                )}
+              </div>
             </div>
           ))}
         </div>

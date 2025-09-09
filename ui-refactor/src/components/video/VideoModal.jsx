@@ -593,9 +593,27 @@ export default function VideosModal({
                                 <p className="text-[var(--text-primary)] text-sm font-medium leading-relaxed w-[409px] line-clamp-2 group-hover:underline group-hover:text-[var(--accent-main)] transition-colors duration-200">
                                   {video.name || "Untitled Video"}
                                 </p>
-                                <p className="text-[var(--text-secondary)] text-xs mt-1">
-                                  {video.type || "Unknown Type"}
-                                </p>
+                                <div className="flex items-center gap-2 mt-1">
+                                  <p className="text-[var(--text-secondary)] text-xs">
+                                    {video.type || "Unknown Type"}
+                                  </p>
+                                  {video.published_date && (
+                                    <>
+                                      <span className="text-[var(--text-secondary)] text-xs">
+                                        •
+                                      </span>
+                                      <p className="text-[var(--text-secondary)] text-xs">
+                                        {new Date(
+                                          video.published_date
+                                        ).toLocaleDateString("en-US", {
+                                          year: "numeric",
+                                          month: "short",
+                                          day: "numeric",
+                                        })}
+                                      </p>
+                                    </>
+                                  )}
+                                </div>
                               </div>
                             </motion.div>
                           ))}
