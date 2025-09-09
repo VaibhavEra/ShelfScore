@@ -496,7 +496,7 @@ export default function VideosModal({
               {selectedVideo ? (
                 /* Video Player View */
                 <div className="px-6 py-6">
-                  {/* Video Player */}
+                  {/* Video Player - centered */}
                   <div className="flex justify-center mb-6">
                     <iframe
                       width="990"
@@ -512,24 +512,24 @@ export default function VideosModal({
 
                   {/* Similar Videos Section */}
                   {similarVideos.length > 0 && (
-                    <div>
+                    <div className="max-w-[1267px] mx-auto">
                       {/* Heading and View All Button */}
-                      <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center gap-[10px] mb-6">
                         <h3 className="text-lg font-semibold text-[var(--text-primary)]">
                           Similar Videos
                         </h3>
                         <button
                           onClick={() => handleViewAllSimilar(selectedVideo)}
-                          className="flex items-center gap-2 px-4 py-2 bg-[var(--bg-trans-15)] rounded-[8px] hover:bg-[var(--accent-main)] transition-colors duration-200 group"
+                          className="flex items-center gap-2 px-4 py-2 bg-[var(--bg-trans-15)] rounded-[8px] hover:bg-[var(--accent-main)] transition-colors duration-200 group cursor-pointer"
                         >
                           <span className="text-sm text-[var(--text-primary)] group-hover:text-[#121212]">
                             View All
                           </span>
-                          <ArrowRight className="w-4 h-4 text-[var(--text-primary)] group-hover:text-[#121212]" />
+                          <ChevronRight className="w-4 h-4 text-[var(--text-primary)] group-hover:text-[#121212]" />
                         </button>
                       </div>
 
-                      {/* Similar Videos Grid */}
+                      {/* Similar Videos Grid - properly aligned and spaced */}
                       <div className="grid grid-cols-4 gap-5">
                         {similarVideos.map((video, idx) => (
                           <motion.div
