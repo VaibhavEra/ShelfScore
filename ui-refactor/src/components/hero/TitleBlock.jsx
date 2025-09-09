@@ -1,11 +1,18 @@
 import { useState, useMemo } from "react";
 import { movieData } from "../../data/movieDetails";
+import { data } from "../../data/releaseDatesData"; // Import your release dates
+import { getCertificationForOrigin } from "../../lib/getCertificationForOrigin";
 
 export default function TitleBlock() {
   // Extract runtime from the original API response structure
   const runtime = movieData.primary.runtime;
   const runtimeHours = Math.floor(runtime / 60);
   const runtimeMinutes = runtime % 60;
+
+  // Get certification data
+  const certificationData = useMemo(() => {
+    return getCertificationForOrigin(movieData, data);
+  }, []);
 
   // persistent state (true = hrs+mins, false = mins)
   const [isPersistent, setIsPersistent] = useState(false);
@@ -75,14 +82,26 @@ export default function TitleBlock() {
           className="text-[var(--text-secondary)]"
           title={`Full release date: ${movieData.primary.release_date.full}`}
         >
-          {movieData.primary.release_date.year}
+          {certificationData?.year || movieData.primary.release_date.year}
         </span>
 
         <span className="text-[var(--text-secondary)]">·</span>
 
+        {/* Language first */}
         <span className="text-[var(--text-secondary)]">
-          {movieData.primary.primary_language.toUpperCase()}
+          {certificationData?.language ||
+            movieData.primary.primary_language.toUpperCase()}
         </span>
+
+        {/* Show certification after language if available */}
+        {certificationData?.certification && (
+          <>
+            <span className="text-[var(--text-secondary)]">·</span>
+            <span className="text-[var(--text-secondary)]">
+              {certificationData.certification}
+            </span>
+          </>
+        )}
       </div>
 
       {/* Genre + Runtime Line */}
