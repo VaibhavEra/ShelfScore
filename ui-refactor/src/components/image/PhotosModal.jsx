@@ -15,6 +15,7 @@ import {
   getLanguageDropdownLabel,
 } from "../../lib/languageLibrary";
 import PhotoViewer from "./PhotoViewer";
+import { movieData } from "../../data/movieDetails";
 
 export default function PhotosModal({
   isOpen,
@@ -461,14 +462,10 @@ export default function PhotosModal({
               <div className="flex flex-col flex-1">
                 <div className="flex items-baseline gap-2">
                   <h2 className="text-xl font-bold text-[var(--text-primary)]">
-                    Dune: Part Two
+                    {movieData.primary.title}
                   </h2>
                   <h3 className="text-sm text-[var(--text-secondary)]">
-                    (
-                    {new Date(
-                      movie?.release_date || "2024-01-01"
-                    ).getFullYear()}
-                    )
+                    ({movieData.primary.release_date.year})
                   </h3>
                 </div>
                 <h3 className="text-lg font-semibold text-[var(--text-primary)] mt-2">
