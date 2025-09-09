@@ -269,7 +269,7 @@ export default function PhotoViewer({
 
   return (
     <motion.div
-      className="p-6"
+      className="pt-6 px-6"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
@@ -373,119 +373,121 @@ export default function PhotoViewer({
           transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
         >
           {/* Heading and Controls */}
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-[10px]">
-              <motion.h3
-                className="text-lg font-semibold text-[#FFFFFF]"
-                initial={{ opacity: 0, x: -10 }}
+          <div className="w-[1267px] mx-auto mb-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-[10px]">
+                <motion.h3
+                  className="text-lg font-semibold text-[var(--text-primary)]"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: 0.3 }}
+                >
+                  {photoTypeOptions.find(
+                    (opt) => opt.value === getPhotoCategory(selectedPhoto)
+                  )?.label || "Photos"}
+                </motion.h3>
+                <motion.button
+                  onClick={() => handleViewAllSimilar(selectedPhoto)}
+                  className="flex items-center gap-[10px] px-[18px] py-[8px] bg-[var(--bg-trans-15)] rounded-[10px] hover:bg-[var(--bg-trans-60)] transition-colors hover:cursor-pointer"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: 0.4 }}
+                >
+                  <p className="text-sm text-[var(--text-primary)]">View All</p>
+                  <ChevronRight className="w-[24px] h-[24px] text-[var(--text-primary)]" />
+                </motion.button>
+              </div>
+
+              {/* Gallery Scroll Arrows */}
+              <motion.div
+                className="flex items-center gap-[5px]"
+                initial={{ opacity: 0, x: 10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: 0.3 }}
               >
-                {photoTypeOptions.find(
-                  (opt) => opt.value === getPhotoCategory(selectedPhoto)
-                )?.label || "Photos"}
-              </motion.h3>
-              <motion.button
-                onClick={() => handleViewAllSimilar(selectedPhoto)}
-                className="flex items-center gap-[10px] px-[18px] py-[8px] bg-white/15 rounded-[10px] hover:bg-white/20 transition-colors"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 0.4 }}
-              >
-                <p className="text-sm text-[var(--text-primary)]">View All</p>
-                <ChevronRight className="w-[24px] h-[24px] text-[var(--text-primary)]" />
-              </motion.button>
+                <motion.button
+                  onClick={() => scrollGallery("prev")}
+                  disabled={!canScrollLeft}
+                  className={`w-[36px] h-[36px] flex items-center justify-center rounded-full transition-colors duration-200 ${
+                    canScrollLeft
+                      ? "bg-[var(--bg-trans-15)] text-[var(--text-primary)] hover:bg-[var(--bg-trans-60)]"
+                      : "bg-[var(--bg-trans-5)] text-[var(--text-secondary)] cursor-not-allowed"
+                  }`}
+                  whileHover={canScrollLeft ? { scale: 1.05 } : {}}
+                  whileTap={canScrollLeft ? { scale: 0.95 } : {}}
+                >
+                  <ChevronLeft size={20} />
+                </motion.button>
+                <motion.button
+                  onClick={() => scrollGallery("next")}
+                  disabled={!canScrollRight}
+                  className={`w-[36px] h-[36px] flex items-center justify-center rounded-full transition-colors duration-200 ${
+                    canScrollRight
+                      ? "bg-[var(--bg-trans-15)] text-[var(--text-primary)] hover:bg-[var(--bg-trans-60)]"
+                      : "bg-[var(--bg-trans-5)] text-[var(--text-secondary)] cursor-not-allowed"
+                  }`}
+                  whileHover={canScrollRight ? { scale: 1.05 } : {}}
+                  whileTap={canScrollRight ? { scale: 0.95 } : {}}
+                >
+                  <ChevronRight size={20} />
+                </motion.button>
+              </motion.div>
             </div>
-
-            {/* Gallery Scroll Arrows */}
-            <motion.div
-              className="flex items-center gap-[5px]"
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: 0.3 }}
-            >
-              <motion.button
-                onClick={() => scrollGallery("prev")}
-                disabled={!canScrollLeft}
-                className={`w-[36px] h-[36px] flex items-center justify-center rounded-full transition-colors duration-200 ${
-                  canScrollLeft
-                    ? "bg-[var(--bg-trans-15)] text-[var(--text-primary)] hover:bg-[var(--bg-trans-60)]"
-                    : "bg-[var(--bg-trans-5)] text-[var(--text-secondary)] cursor-not-allowed"
-                }`}
-                whileHover={canScrollLeft ? { scale: 1.05 } : {}}
-                whileTap={canScrollLeft ? { scale: 0.95 } : {}}
-              >
-                <ChevronLeft size={20} />
-              </motion.button>
-              <motion.button
-                onClick={() => scrollGallery("next")}
-                disabled={!canScrollRight}
-                className={`w-[36px] h-[36px] flex items-center justify-center rounded-full transition-colors duration-200 ${
-                  canScrollRight
-                    ? "bg-[var(--bg-trans-15)] text-[var(--text-primary)] hover:bg-[var(--bg-trans-60)]"
-                    : "bg-[var(--bg-trans-5)] text-[var(--text-secondary)] cursor-not-allowed"
-                }`}
-                whileHover={canScrollRight ? { scale: 1.05 } : {}}
-                whileTap={canScrollRight ? { scale: 0.95 } : {}}
-              >
-                <ChevronRight size={20} />
-              </motion.button>
-            </motion.div>
           </div>
 
-          {/* Photos Grid with staggered animation and border hover effect */}
-          <motion.div
-            ref={galleryRef}
-            className="flex gap-[8px] overflow-x-auto"
-            style={{
-              scrollbarWidth: "none",
-              msOverflowStyle: "none",
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
-          >
-            {galleryPhotos.map((photo, idx) => (
-              <motion.div
-                key={photo.file_path}
-                className={`flex-shrink-0 cursor-pointer rounded-[10px] overflow-hidden transition-colors duration-200 ${
-                  photo.file_path === selectedPhoto.file_path
-                    ? "border-2 border-[var(--accent-main)]"
-                    : "border-2 border-transparent hover:border-[var(--bg-trans-15)]"
-                }`}
-                onClick={() => handlePhotoSelect(photo)}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.3,
-                  delay: 0.4 + idx * 0.05,
-                  ease: "easeOut",
-                }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <div
-                  className={`${
-                    getPhotoConfig(getPhotoCategory(photo)).thumbnailClass
-                  } ${getFrameBackgroundClass(getPhotoCategory(photo))}`}
+          {/* Photos Grid with consistent modal alignment */}
+          <div className="w-[1267px] mx-auto">
+            <motion.div
+              ref={galleryRef}
+              className="flex gap-[8px] overflow-x-auto"
+              style={{
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+            >
+              {galleryPhotos.map((photo, idx) => (
+                <motion.div
+                  key={photo.file_path}
+                  className={`flex-shrink-0 cursor-pointer rounded-[10px] overflow-hidden transition-colors duration-200 ${
+                    photo.file_path === selectedPhoto.file_path
+                      ? "border-2 border-[var(--accent-main)]"
+                      : "border-2 border-transparent hover:border-[var(--bg-trans-15)]"
+                  }`}
+                  onClick={() => handlePhotoSelect(photo)}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.3,
+                    delay: 0.4 + idx * 0.05,
+                    ease: "easeOut",
+                  }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <img
-                    src={getImageUrl(photo)}
-                    alt={`Gallery photo ${idx + 1}`}
-                    className={`w-full h-full transition-transform duration-200 ${
-                      getPhotoCategory(photo) === "logos"
-                        ? "object-contain"
-                        : "object-cover"
-                    }`}
-                    onError={(e) => {
-                      e.target.src = "/api/placeholder/114/71";
-                    }}
-                  />
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+                  <div
+                    className={`${
+                      getPhotoConfig(getPhotoCategory(photo)).thumbnailClass
+                    } ${getFrameBackgroundClass(getPhotoCategory(photo))}`}
+                  >
+                    <img
+                      src={getImageUrl(photo)}
+                      alt={`Gallery photo ${idx + 1}`}
+                      className={`w-full h-full transition-transform duration-200 ${
+                        getPhotoCategory(photo) === "logos"
+                          ? "object-contain"
+                          : "object-cover"
+                      }`}
+                      onError={(e) => {
+                        e.target.src = "/api/placeholder/114/71";
+                      }}
+                    />
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </motion.div>
       )}
     </motion.div>
