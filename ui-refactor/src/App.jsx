@@ -12,6 +12,7 @@ import RelatedMoviesBlock from "./components/relatedMovies/RelatedMoviesBlock";
 import Sidebar from "./components/Sidebar";
 
 import ReleaseDatesBlock from "./components/releaseDates/ReleaseDatesBlock";
+import Logo from "./components/Logo";
 import { data } from "../src/data/releaseDatesData";
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             <ReleaseDatesBlock releaseData={data} id="release-dates" />
             <RelatedMoviesBlock id="related-movies" />
             <SimilarMoviesBlock id="similar-movies" />
+            <Logo />
           </div>
         </div>
 
