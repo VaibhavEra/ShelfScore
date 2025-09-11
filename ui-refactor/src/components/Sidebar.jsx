@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { movieData } from "../data/movieDetails";
 
 export default function Sidebar() {
@@ -6,21 +6,24 @@ export default function Sidebar() {
   const containerRef = useRef(null);
   const [indicatorStyle, setIndicatorStyle] = useState({ top: 0, height: 0 });
 
-  // Create sections array conditionally based on belongs_to_collection
-  const sections = [
-    { id: "overview", title: "Overview" },
-    { id: "cast", title: "Cast & Crew" },
-    { id: "photos", title: "Photos" },
-    { id: "videos", title: "Videos" },
-    { id: "watch-providers", title: "Watch Providers" },
-    { id: "additional-info", title: "Additional Information" },
-    { id: "release-dates", title: "Release Dates" },
-    // Only include Related Movies if movie belongs to a collection
-    ...(movieData.primary.belongs_to_collection
-      ? [{ id: "related-movies", title: "Related Movies" }]
-      : []),
-    { id: "similar-movies", title: "Similar Movies" },
-  ];
+  // Memoize sections array to prevent re-creation on every render
+  const sections = useMemo(
+    () => [
+      { id: "overview", title: "Overview" },
+      { id: "cast", title: "Cast & Crew" },
+      { id: "photos", title: "Photos" },
+      { id: "videos", title: "Videos" },
+      { id: "watch-providers", title: "Watch Providers" },
+      { id: "additional-info", title: "Additional Information" },
+      { id: "release-dates", title: "Release Dates" },
+      // Only include Related Movies if movie belongs to a collection
+      ...(movieData.primary.belongs_to_collection
+        ? [{ id: "related-movies", title: "Related Movies" }]
+        : []),
+      { id: "similar-movies", title: "Similar Movies" },
+    ],
+    [movieData.primary.belongs_to_collection]
+  );
 
   // Initialize activeSection with first section
   useEffect(() => {
