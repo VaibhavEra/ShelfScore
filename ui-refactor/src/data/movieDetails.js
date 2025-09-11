@@ -3,9 +3,9 @@ export const movieData = {
     id: 693134,
     title: "Dune: Part Two",
     poster_url:
-      "https://image.tmdb.org/t/p/w500/6izwz7rsy95ARzTR3poZ8H6c5pp.jpg",
+      "https://image.tmdb.org/t/p/original/6izwz7rsy95ARzTR3poZ8H6c5pp.jpg",
     backdrop_url:
-      "https://image.tmdb.org/t/p/w780/o869RihWTdTyBcEZBjz0izvEsVf.jpg",
+      "https://image.tmdb.org/t/p/original/o869RihWTdTyBcEZBjz0izvEsVf.jpg",
     genres: [
       {
         id: 878,
@@ -58,7 +58,7 @@ export const movieData = {
   },
   financial: {
     budget: 190000000,
-    revenue: 714444358,
+    revenue: 714844358,
   },
   platforms: {
     imdb_id: "tt15239678",

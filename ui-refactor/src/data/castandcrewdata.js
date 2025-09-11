@@ -98,7 +98,7 @@ export const movieData = {
       character: "Lady Margot Fenring",
       order: 9,
       profile_url:
-        "https://image.tmdb.org/t/p/w185/7JAUieStGsHZAy6ed2WuFy4CJjm.jpg",
+        "https://image.tmdb.org/t/p/w185/1LUzpfSkNluSW8EhdkMaCGRUrTz.jpg",
     },
     {
       id: 1640,
@@ -2301,6 +2301,16 @@ export const movieData = {
           original_name: "Steven Doar",
           known_for_department: "Sound",
           profile_url: null,
+        },
+      ],
+      "Digital Effects Supervisor": [
+        {
+          id: 5267517,
+          name: "Nick Marshall",
+          original_name: "Nick Marshall",
+          known_for_department: "Visual Effects",
+          profile_url:
+            "https://image.tmdb.org/t/p/w185/q4MqmiaWBfuvMW09uAZMAdXrSG8.jpg",
         },
       ],
     },

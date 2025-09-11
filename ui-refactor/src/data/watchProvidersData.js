@@ -188,6 +188,11 @@ export const watchProvidersData = {
       link: "https://www.themoviedb.org/movie/693134-dune-part-two/watch?locale=AU",
       flatrate: [
         {
+          provider_name: "Netflix",
+          logo_url:
+            "https://image.tmdb.org/t/p/w92/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        },
+        {
           provider_name: "Foxtel Now",
           logo_url:
             "https://image.tmdb.org/t/p/w92/fejdSG7TwNQ5E0p6u7A6LVs280R.jpg",
@@ -473,6 +478,11 @@ export const watchProvidersData = {
       link: "https://www.themoviedb.org/movie/693134-dune-part-two/watch?locale=BR",
       flatrate: [
         {
+          provider_name: "Netflix",
+          logo_url:
+            "https://image.tmdb.org/t/p/w92/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        },
+        {
           provider_name: "HBO Max",
           logo_url:
             "https://image.tmdb.org/t/p/w92/jbe4gVSfRlbPTdESXhEKpornsfu.jpg",
@@ -577,6 +587,11 @@ export const watchProvidersData = {
     CA: {
       link: "https://www.themoviedb.org/movie/693134-dune-part-two/watch?locale=CA",
       flatrate: [
+        {
+          provider_name: "Netflix",
+          logo_url:
+            "https://image.tmdb.org/t/p/w92/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        },
         {
           provider_name: "Netflix Standard with Ads",
           logo_url:
@@ -733,6 +748,11 @@ export const watchProvidersData = {
           logo_url:
             "https://image.tmdb.org/t/p/w92/21M5CpiOYGOhHj2sVPXqwt6yeTO.jpg",
         },
+        {
+          provider_name: "Amazon Video",
+          logo_url:
+            "https://image.tmdb.org/t/p/w92/seGSXajazLMCKGB5hnRCidtjay1.jpg",
+        },
       ],
       buy: [
         {
@@ -744,6 +764,11 @@ export const watchProvidersData = {
           provider_name: "Google Play Movies",
           logo_url:
             "https://image.tmdb.org/t/p/w92/8z7rC8uIDaTM91X0ZfkRf04ydj2.jpg",
+        },
+        {
+          provider_name: "Amazon Video",
+          logo_url:
+            "https://image.tmdb.org/t/p/w92/seGSXajazLMCKGB5hnRCidtjay1.jpg",
         },
       ],
     },
@@ -789,6 +814,11 @@ export const watchProvidersData = {
           logo_url:
             "https://image.tmdb.org/t/p/w92/21M5CpiOYGOhHj2sVPXqwt6yeTO.jpg",
         },
+        {
+          provider_name: "Amazon Video",
+          logo_url:
+            "https://image.tmdb.org/t/p/w92/seGSXajazLMCKGB5hnRCidtjay1.jpg",
+        },
       ],
       buy: [
         {
@@ -800,6 +830,11 @@ export const watchProvidersData = {
           provider_name: "Apple TV",
           logo_url:
             "https://image.tmdb.org/t/p/w92/9ghgSC0MA082EL6HLCW3GalykFD.jpg",
+        },
+        {
+          provider_name: "Amazon Video",
+          logo_url:
+            "https://image.tmdb.org/t/p/w92/seGSXajazLMCKGB5hnRCidtjay1.jpg",
         },
       ],
     },
@@ -1226,6 +1261,11 @@ export const watchProvidersData = {
       link: "https://www.themoviedb.org/movie/693134-dune-part-two/watch?locale=ES",
       flatrate: [
         {
+          provider_name: "Netflix",
+          logo_url:
+            "https://image.tmdb.org/t/p/w92/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        },
+        {
           provider_name: "HBO Max",
           logo_url:
             "https://image.tmdb.org/t/p/w92/jbe4gVSfRlbPTdESXhEKpornsfu.jpg",
@@ -1546,6 +1586,18 @@ export const watchProvidersData = {
             "https://image.tmdb.org/t/p/w92/pTnn5JwWr4p3pG8H6VrpiQo7Vs0.jpg",
         },
       ],
+    },
+    GF: {
+      link: "https://www.themoviedb.org/movie/693134-dune-part-two/watch?locale=GF",
+      flatrate: [
+        {
+          provider_name: "Netflix",
+          logo_url:
+            "https://image.tmdb.org/t/p/w92/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        },
+      ],
+      rent: [],
+      buy: [],
     },
     GH: {
       link: "https://www.themoviedb.org/movie/693134-dune-part-two/watch?locale=GH",
@@ -2033,6 +2085,11 @@ export const watchProvidersData = {
       link: "https://www.themoviedb.org/movie/693134-dune-part-two/watch?locale=JP",
       flatrate: [
         {
+          provider_name: "Netflix",
+          logo_url:
+            "https://image.tmdb.org/t/p/w92/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
+        },
+        {
           provider_name: "Netflix Standard with Ads",
           logo_url:
             "https://image.tmdb.org/t/p/w92/dpR8r13zWDeUR0QkzWidrdMxa56.jpg",
@@ -2139,13 +2196,7 @@ export const watchProvidersData = {
     },
     LT: {
       link: "https://www.themoviedb.org/movie/693134-dune-part-two/watch?locale=LT",
-      flatrate: [
-        {
-          provider_name: "Go3",
-          logo_url:
-            "https://image.tmdb.org/t/p/w92/1y6ds7KDN5Q33Jb0ZxnroEJ58Gd.jpg",
-        },
-      ],
+      flatrate: [],
       rent: [
         {
           provider_name: "Apple TV",
@@ -2196,7 +2247,13 @@ export const watchProvidersData = {
     },
     LV: {
       link: "https://www.themoviedb.org/movie/693134-dune-part-two/watch?locale=LV",
-      flatrate: [],
+      flatrate: [
+        {
+          provider_name: "Go3",
+          logo_url:
+            "https://image.tmdb.org/t/p/w92/1y6ds7KDN5Q33Jb0ZxnroEJ58Gd.jpg",
+        },
+      ],
       rent: [
         {
           provider_name: "Apple TV",
@@ -2346,6 +2403,11 @@ export const watchProvidersData = {
           provider_name: "HBO Max",
           logo_url:
             "https://image.tmdb.org/t/p/w92/jbe4gVSfRlbPTdESXhEKpornsfu.jpg",
+        },
+        {
+          provider_name: "Netflix",
+          logo_url:
+            "https://image.tmdb.org/t/p/w92/pbpMk2JmcoNnQwx5JGpXngfoWtp.jpg",
         },
         {
           provider_name: "HBO Max Amazon Channel",
