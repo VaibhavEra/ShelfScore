@@ -19,19 +19,19 @@ export default function AdditionalInformationBlock() {
   };
 
   const infoItems = [
+    // {
+    //   label: "Status",
+    //   value: movieData.additional.status,
+    // },
     {
-      label: "Status",
-      value: movieData.additional.status,
+      label: "Origin Country",
+      value: movieData.additional.origin_country.join(", "),
     },
     {
       label: "Production Companies",
       value: movieData.additional.production_companies
         .map((company) => company.name)
         .join(", "),
-    },
-    {
-      label: "Origin Country",
-      value: movieData.additional.origin_country.join(", "),
     },
     {
       label: "Production Country",
@@ -45,10 +45,10 @@ export default function AdditionalInformationBlock() {
         .map((language) => language.english_name)
         .join(", "),
     },
-    {
-      label: "Primary Language",
-      value: movieData.additional.primary_language.toUpperCase(),
-    },
+    // {
+    //   label: "Primary Language",
+    //   value: movieData.additional.primary_language.toUpperCase(),
+    // },
     {
       label: "Budget",
       value: `$${movieData.financial.budget.toLocaleString()}`,
