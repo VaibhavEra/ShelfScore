@@ -12,19 +12,19 @@ export default function PhotoViewer({
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Helper function to get photo category safely
+  // Helper function to get photo category safely - UPDATED
   const getPhotoCategory = (photo) => {
     if (!photo || !data) return null;
     return Object.keys(data).find((cat) => {
       const categoryData = data[cat];
       return (
         Array.isArray(categoryData) &&
-        categoryData.some((p) => p.file_path === photo.file_path)
+        categoryData.some((p) => p.url === photo.url) // CHANGED: file_path to url
       );
     });
   };
 
-  // Get all photos from the same category for carousel
+  // Get all photos from the same category for carousel - UPDATED
   const getCarouselPhotos = () => {
     if (!selectedPhoto || !data) return [];
 
@@ -33,7 +33,7 @@ export default function PhotoViewer({
       return (
         Array.isArray(categoryData) &&
         categoryData.some(
-          (photo) => photo.file_path === selectedPhoto.file_path
+          (photo) => photo.url === selectedPhoto.url // CHANGED: file_path to url
         )
       );
     });
@@ -80,11 +80,11 @@ export default function PhotoViewer({
       : "bg-[var(--bg-trans-15)]";
   };
 
-  // Initialize current index
+  // Initialize current index - UPDATED
   useEffect(() => {
     if (selectedPhoto && carouselPhotos.length > 0) {
       const photoIndex = carouselPhotos.findIndex(
-        (photo) => photo.file_path === selectedPhoto.file_path
+        (photo) => photo.url === selectedPhoto.url // CHANGED: file_path to url
       );
       if (photoIndex !== -1) {
         setCurrentIndex(photoIndex);

@@ -25,7 +25,7 @@ export default function ImageBlock() {
     return Object.values(data)
       .filter(Array.isArray)
       .flat()
-      .filter((photo) => photo && photo.file_path);
+      .filter((photo) => photo && photo.url); // CHANGED: file_path to url
   };
 
   const allPhotos = getAllPhotos();
@@ -34,9 +34,8 @@ export default function ImageBlock() {
   const maxDisplay = 15;
   const displayPhotos = allPhotos.slice(startIndex, startIndex + maxDisplay);
 
-  // Helper function to get image URL
-  const getImageUrl = (photo, size = "w500") =>
-    `https://image.tmdb.org/t/p/${size}${photo.file_path}`;
+  // Helper function to get image URL - UPDATED
+  const getImageUrl = (photo) => photo.url;
 
   // Handle photo click to open full-screen photo viewer
   const handlePhotoClick = (photo) => {
@@ -194,7 +193,7 @@ export default function ImageBlock() {
         >
           {displayPhotos.map((photo, index) => (
             <div
-              key={photo.file_path}
+              key={photo.url} // CHANGED: file_path to url
               className="flex-shrink-0 w-[246px] h-[246px] snap-start cursor-pointer group overflow-hidden rounded-[10px] shadow-lg"
               onClick={() => handlePhotoClick(photo)}
             >

@@ -94,7 +94,7 @@ export default function PhotosModal({
         const categoryData = data[cat];
         return (
           Array.isArray(categoryData) &&
-          categoryData.some((p) => p.file_path === initialPhoto.file_path)
+          categoryData.some((p) => p.url === initialPhoto.url)
         );
       });
 
@@ -132,7 +132,7 @@ export default function PhotosModal({
       const categoryData = data[cat];
       return (
         Array.isArray(categoryData) &&
-        categoryData.some((p) => p.file_path === photo.file_path)
+        categoryData.some((p) => p.url === photo.url)
       );
     });
 
@@ -379,8 +379,8 @@ export default function PhotosModal({
   const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
   const currentPhotos = filteredPhotos.slice(startIndex, endIndex);
 
-  const getImageUrl = (photo, size = "w500") =>
-    `https://image.tmdb.org/t/p/${size}${photo.file_path}`;
+  // Updated getImageUrl to just return the complete URL
+  const getImageUrl = (photo) => photo.url;
 
   const getPageNumbers = () => {
     if (totalPages <= 7) {
@@ -421,7 +421,7 @@ export default function PhotosModal({
       const categoryData = data[cat];
       return (
         Array.isArray(categoryData) &&
-        categoryData.some((p) => p.file_path === photo.file_path)
+        categoryData.some((p) => p.url === photo.url)
       );
     });
   };
@@ -671,7 +671,7 @@ export default function PhotosModal({
                         >
                           {currentPhotos.map((photo, idx) => (
                             <motion.div
-                              key={`${photo.file_path}-${idx}`}
+                              key={`${photo.url}-${idx}`}
                               className="cursor-pointer group"
                               initial={{ opacity: 0, scale: 0.9 }}
                               animate={{ opacity: 1, scale: 1 }}

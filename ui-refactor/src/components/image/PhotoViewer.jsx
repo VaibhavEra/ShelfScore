@@ -53,19 +53,19 @@ export default function PhotoViewer({
       : "bg-[var(--bg-trans-15)]";
   };
 
-  // Helper function to get photo category safely
+  // Helper function to get photo category safely - UPDATED
   const getPhotoCategory = (photo) => {
     if (!photo || !data) return null;
     return Object.keys(data).find((cat) => {
       const categoryData = data[cat];
       return (
         Array.isArray(categoryData) &&
-        categoryData.some((p) => p.file_path === photo.file_path)
+        categoryData.some((p) => p.url === photo.url) // CHANGED: file_path to url
       );
     });
   };
 
-  // Get all photos from the same category for gallery
+  // Get all photos from the same category for gallery - UPDATED
   const getGalleryPhotos = () => {
     if (!selectedPhoto || !data) return [];
 
@@ -74,7 +74,7 @@ export default function PhotoViewer({
       return (
         Array.isArray(categoryData) &&
         categoryData.some(
-          (photo) => photo.file_path === selectedPhoto.file_path
+          (photo) => photo.url === selectedPhoto.url // CHANGED: file_path to url
         )
       );
     });
@@ -97,7 +97,7 @@ export default function PhotoViewer({
 
   const galleryPhotos = getGalleryPhotos();
   const currentPhotoIndex = galleryPhotos.findIndex(
-    (photo) => photo.file_path === selectedPhoto?.file_path
+    (photo) => photo.url === selectedPhoto?.url // CHANGED: file_path to url
   );
 
   // Reset image loaded state when photo changes
@@ -302,7 +302,7 @@ export default function PhotoViewer({
         >
           <AnimatePresence mode="wait">
             <motion.img
-              key={selectedPhoto?.file_path}
+              key={selectedPhoto?.url} // CHANGED: file_path to url
               src={getImageUrl(selectedPhoto, "original")}
               alt="Selected photo"
               className="max-w-full max-h-full object-contain"
@@ -450,9 +450,9 @@ export default function PhotoViewer({
             >
               {galleryPhotos.map((photo, idx) => (
                 <motion.div
-                  key={photo.file_path}
+                  key={photo.url} // CHANGED: file_path to url
                   className={`flex-shrink-0 cursor-pointer rounded-[10px] overflow-hidden transition-colors duration-200 ${
-                    photo.file_path === selectedPhoto.file_path
+                    photo.url === selectedPhoto.url // CHANGED: file_path to url
                       ? "border-2 border-[var(--accent-main)]"
                       : "border-2 border-transparent hover:border-[var(--bg-trans-15)]"
                   }`}

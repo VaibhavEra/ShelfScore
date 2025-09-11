@@ -340,8 +340,8 @@ export default function PhotosModal({ isOpen, onClose, movie }) {
   const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
   const currentPhotos = filteredPhotos.slice(startIndex, endIndex);
 
-  const getImageUrl = (photo, size = "w500") =>
-    `https://image.tmdb.org/t/p/${size}${photo.file_path}`;
+  // Updated getImageUrl to return photo.url directly
+  const getImageUrl = (photo) => photo.url;
 
   const getPageNumbers = () => {
     if (totalPages <= 7) {
@@ -418,11 +418,7 @@ export default function PhotosModal({ isOpen, onClose, movie }) {
                   </h3>
                 </div>
                 <h3 className="text-lg font-semibold text-[var(--text-primary)] mt-2">
-                  {selectedPhoto
-                    ? photoTypeOptions.find(
-                        (opt) => opt.value === getPhotoCategory(selectedPhoto)
-                      )?.label || "Photo"
-                    : "Posters, Backdrops & Logos"}
+                  Posters, Backdrops & Logos
                 </h3>
 
                 {/* Filters */}
@@ -605,7 +601,7 @@ export default function PhotosModal({ isOpen, onClose, movie }) {
                     >
                       {currentPhotos.map((photo, idx) => (
                         <motion.div
-                          key={`${photo.file_path}-${idx}`}
+                          key={`${photo.url}-${idx}`} // CHANGED: file_path to url
                           className="cursor-pointer group"
                           initial={{ opacity: 0, scale: 0.9 }}
                           animate={{ opacity: 1, scale: 1 }}

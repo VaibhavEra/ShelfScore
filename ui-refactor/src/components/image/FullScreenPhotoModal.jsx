@@ -12,8 +12,8 @@ export default function FullScreenPhotoModal({ photo, onClose }) {
     };
   }, []);
 
-  const getImageUrl = (photo, size = "original") =>
-    `https://image.tmdb.org/t/p/${size}${photo.file_path}`;
+  // Updated getImageUrl to just return the complete URL
+  const getImageUrl = (photo) => photo.url;
 
   return (
     <AnimatePresence>
@@ -56,7 +56,8 @@ export default function FullScreenPhotoModal({ photo, onClose }) {
           transition={{ duration: 0.5, ease: "easeOut" }}
           onClick={(e) => e.stopPropagation()}
           onError={(e) => {
-            e.target.src = getImageUrl(photo, "w500");
+            // Since photo.url is already the full URL, we'll keep it as fallback
+            e.target.src = photo.url;
           }}
         />
       </motion.div>
