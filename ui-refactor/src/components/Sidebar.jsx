@@ -1,26 +1,38 @@
 import { useEffect, useState, useRef } from "react";
-
-const sections = [
-  { id: "overview", title: "Overview" },
-  { id: "cast", title: "Cast & Crew" },
-  { id: "photos", title: "Photos" },
-  { id: "videos", title: "Videos" },
-  { id: "watch-providers", title: "Watch Providers" },
-  { id: "additional-info", title: "Additional Information" },
-  { id: "release-dates", title: "Release Dates" },
-  { id: "related-movies", title: "Related Movies" },
-  { id: "similar-movies", title: "Similar Movies" },
-];
+import { movieData } from "../data/movieDetails";
 
 export default function Sidebar() {
-  const [activeSection, setActiveSection] = useState(sections[0].id);
+  const [activeSection, setActiveSection] = useState("");
   const containerRef = useRef(null);
   const [indicatorStyle, setIndicatorStyle] = useState({ top: 0, height: 0 });
+
+  // Create sections array conditionally based on belongs_to_collection
+  const sections = [
+    { id: "overview", title: "Overview" },
+    { id: "cast", title: "Cast & Crew" },
+    { id: "photos", title: "Photos" },
+    { id: "videos", title: "Videos" },
+    { id: "watch-providers", title: "Watch Providers" },
+    { id: "additional-info", title: "Additional Information" },
+    { id: "release-dates", title: "Release Dates" },
+    // Only include Related Movies if movie belongs to a collection
+    ...(movieData.primary.belongs_to_collection
+      ? [{ id: "related-movies", title: "Related Movies" }]
+      : []),
+    { id: "similar-movies", title: "Similar Movies" },
+  ];
+
+  // Initialize activeSection with first section
+  useEffect(() => {
+    if (sections.length > 0 && !activeSection) {
+      setActiveSection(sections[0].id);
+    }
+  }, [sections, activeSection]);
 
   // ScrollSpy effect
   useEffect(() => {
     const handleScroll = () => {
-      let current = sections[0].id;
+      let current = sections[0]?.id;
       for (let sec of sections) {
         const el = document.getElementById(sec.id);
         if (el && el.getBoundingClientRect().top <= 150) {
@@ -33,7 +45,7 @@ export default function Sidebar() {
     window.addEventListener("scroll", handleScroll);
     handleScroll(); // run once initially
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [sections]);
 
   // Update indicator position whenever active section changes
   useEffect(() => {
@@ -47,7 +59,7 @@ export default function Sidebar() {
         height: activeButton.offsetHeight + 12, // taller highlight
       });
     }
-  }, [activeSection]);
+  }, [activeSection, sections]);
 
   // Smooth scroll with offset
   const handleClick = (id) => {
