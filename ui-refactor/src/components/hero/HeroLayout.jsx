@@ -5,7 +5,7 @@ import MetaDataBlock from "./MetaDataBlock";
 // HeroLayout.jsx
 function HeroLayout() {
   return (
-    <div className="" id="overview">
+    <div className="mt-[20px]" id="overview">
       <div className="max-w-[1219px] mx-auto flex flex-col gap-[20px]">
         <TitleBlock />
         <PosterBlock />

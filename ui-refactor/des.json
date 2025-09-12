@@ -504,5 +504,45 @@
         }
       }
     }
+  },
+  "navbar": {
+    "content": {
+      "dimension of the container": "1442w and 39h",
+      "position":"center both hz and vt",
+      "gap": "28px between each sub=container",
+      "description": "we will start from left to right and describe each sub-container",
+      "first-sub-container": {
+        "logo": "just a placeholder for now"
+    },
+      "second-sub-container": {
+        "alignment": "center from both axis",
+        "description": "different options: Movies, TV Shows, Popular, Now Playing, Lists",
+        "typography": "16px with text-primary color regular weight"
+      },
+      "thrid-sub-container": {
+        "description": "a search bar",
+        "padding": "20px xaxis and 12px yaxis",
+        "corner-radius": "10px",
+        "background": "bg-secondary",
+        "gap": "auto",
+        "elements": {
+          "1st" : {
+            "gap" :"15px",
+            "alignment": "left",
+            "description": "an all dropdown with arrow downicon with text primary color, with 16px typography regular weight and A search text-input field with placeholder text of "Search ShelfScore" with 14px size text-secondary color"
+          },
+          "2nd": {
+            "icon": "a search icon of size 24x24 with text-primary color, aligned right"
+          }
+      },
+      "fourth-sub-container": {
+        "description": "A watchlist button with a watchlist icon 24x24 with a gap of like 5px text of color primary and size of 16px regular weight"
+      },
+      "fifth-sub-container": {
+        "description": "a user profile icon circle-user-round of size 22x22 with text-primary color, with a gap of 5px between the icon and the text and the text as User"
+      },
+      "sixth-sub-container": {
+        "description": "a dark mode toggle button"
+      }
   }
 }

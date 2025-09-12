@@ -77,7 +77,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="fixed top-[100px] flex gap-[21px]">
+    <aside className="fixed top-[100px] flex gap-[21px] mt-[0px]">
       {/* Scrollbar */}
       <div className="relative w-[6px] flex-shrink-0">
         {/* Track */}
