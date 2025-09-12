@@ -28,6 +28,9 @@
   --dropdown-bg: hsl(0, 0%, 8%); /* Slightly lighter than bg-primary */
   --dropdown-hover: hsl(0, 0%, 20%); /* More pronounced hover state */
   --dropdown-selected: var(--accent-main); /* Use your accent color */
+
+  /* Navigation */
+  --bg-nav: #080808;
 }
 
 /* 3. Base Styles */

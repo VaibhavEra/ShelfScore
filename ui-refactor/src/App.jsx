@@ -10,6 +10,7 @@ import Backglow from "./components/Backglow";
 import SimilarMoviesBlock from "./components/similarMovies/SimilarMoviesBlock";
 import RelatedMoviesBlock from "./components/relatedMovies/RelatedMoviesBlock";
 import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
 
 import ReleaseDatesBlock from "./components/releaseDates/ReleaseDatesBlock";
 import Logo from "./components/Logo";
@@ -18,13 +19,16 @@ import { data } from "../src/data/releaseDatesData";
 function App() {
   return (
     <div className="relative bg-[var(--bg-primary)] min-h-screen overflow-hidden">
+      {/* Navigation Bar */}
+      <Navbar />
+
       {/* Glow stays back */}
       <div className="absolute inset-0 z-0">
         <Backglow />
       </div>
 
-      {/* Layout: content + sidebar */}
-      <div className="relative z-10 flex max-w-[1400px] mx-auto px-8 gap-16">
+      {/* Layout: content + sidebar with top padding for navbar */}
+      <div className="relative z-10 flex max-w-[1400px] mx-auto px-8 gap-16 pt-[73px]">
         {/* Main content */}
         <div className="flex-1">
           <HeroLayout id="overview" />
