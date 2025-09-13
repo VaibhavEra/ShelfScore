@@ -6,14 +6,14 @@ import ImageBlock from "./components/image/ImageBlock";
 import SectionDivider from "./components/sectiondivider/SectionDivider";
 import VideoBlock from "./components/video/VideoBlock";
 import WatchProvidersBlock from "./components/watchProviders/WatchProvidersBlock";
-import Backglow from "./components/Backglow";
+import Backglow from "./components/backglow/Backglow";
 import SimilarMoviesBlock from "./components/similarMovies/SimilarMoviesBlock";
 import RelatedMoviesBlock from "./components/relatedMovies/RelatedMoviesBlock";
-import Sidebar from "./components/Sidebar";
-import Navbar from "./components/Navbar";
+import Sidebar from "./components/sidebar/Sidebar";
+import Navbar from "./components/navbar/Navbar";
 
 import ReleaseDatesBlock from "./components/releaseDates/ReleaseDatesBlock";
-import Logo from "./components/Logo";
+import Logo from "./components/logo/Logo";
 import { data } from "../src/data/releaseDatesData";
 
 function App() {

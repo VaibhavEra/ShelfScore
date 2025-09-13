@@ -1,6 +1,6 @@
 import React from "react";
-import { movieData } from "../data/movieDetails";
-import { data } from "../data/photosdata";
+import { movieData } from "../../data/movieDetails";
+import { data } from "../../data/photosdata";
 
 const MovieLogo = () => {
   // Get the primary language from movie data
