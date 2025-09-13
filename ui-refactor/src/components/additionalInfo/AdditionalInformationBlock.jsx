@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ChevronDown, Globe, Film } from "lucide-react";
+import { ChevronDown, Link } from "lucide-react";
+import { SiImdb, SiThemoviedatabase } from "@icons-pack/react-simple-icons";
 import { movieData } from "../../data/movieDetails";
 
 export default function AdditionalInformationBlock() {
@@ -9,13 +10,23 @@ export default function AdditionalInformationBlock() {
   const getPlatformIcon = (platform) => {
     const platformLower = platform.toLowerCase();
     if (platformLower.includes("imdb")) {
-      return <Film size={16} className="text-yellow-500" />;
+      return <SiImdb size={36} color="var(--text-primary)" />;
     } else if (platformLower.includes("tmdb")) {
-      return <Globe size={16} className="text-blue-500" />;
+      return <SiThemoviedatabase size={36} color="var(--text-primary)" />;
     } else if (platformLower.includes("homepage")) {
-      return <Globe size={16} className="text-green-500" />;
+      return (
+        <Link
+          size={36}
+          className="text-[var(--text-primary)] transition-colors duration-200"
+        />
+      );
     }
-    return <Globe size={16} className="text-[var(--text-secondary)]" />;
+    return (
+      <Link
+        size={36}
+        className="text-[var(--text-primary)] transition-colors duration-200"
+      />
+    );
   };
 
   const infoItems = [
@@ -23,10 +34,10 @@ export default function AdditionalInformationBlock() {
     //   label: "Status",
     //   value: movieData.additional.status,
     // },
-    {
-      label: "Origin Country",
-      value: movieData.additional.origin_country.join(", "),
-    },
+    // {
+    //   label: "Origin Country",
+    //   value: movieData.additional.origin_country.join(", "),
+    // },
     {
       label: "Production Companies",
       value: movieData.additional.production_companies
@@ -60,43 +71,40 @@ export default function AdditionalInformationBlock() {
     {
       label: "Platforms",
       value: (
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           {movieData.platforms.imdb_id && (
             <div className="flex items-center gap-2">
-              {getPlatformIcon("imdb")}
               <a
                 href={`https://www.imdb.com/title/${movieData.platforms.imdb_id}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[var(--text-primary)] hover:text-[var(--accent-main)] transition-colors"
+                className="flex items-center transition-colors duration-200 hover:[&>svg]:!fill-[#F5C518]"
               >
-                IMDb
+                {getPlatformIcon("imdb")}
               </a>
             </div>
           )}
           {movieData.platforms.tmdb_id && (
             <div className="flex items-center gap-2">
-              {getPlatformIcon("tmdb")}
               <a
                 href={`https://www.themoviedb.org/movie/${movieData.platforms.tmdb_id}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[var(--text-primary)] hover:text-[var(--accent-main)] transition-colors"
+                className="flex items-center transition-colors duration-200 hover:[&>svg]:!fill-[#01B4E4]"
               >
-                TMDB
+                {getPlatformIcon("tmdb")}
               </a>
             </div>
           )}
           {movieData.platforms.homepage && (
             <div className="flex items-center gap-2">
-              {getPlatformIcon("homepage")}
               <a
                 href={movieData.platforms.homepage}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[var(--text-primary)] hover:text-[var(--accent-main)] transition-colors"
+                className="flex items-center transition-colors duration-200 hover:[&>svg]:!stroke-[var(--accent-main)]"
               >
-                Official Site
+                {getPlatformIcon("homepage")}
               </a>
             </div>
           )}
