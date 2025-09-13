@@ -11,9 +11,25 @@ export default function MetadataBlock() {
   const directors = castCrewData.credits?.director || [];
   const writers = castCrewData.credits?.writing || [];
 
-  // Format arrays of objects into "Name · Name" strings
-  const formatPeople = (arr) =>
-    arr && arr.length ? arr.map((p) => p.name).join(" · ") : "—";
+  // Format people with individual hover elements
+  const formatPeopleWithHover = (arr) => {
+    if (!arr || !arr.length) return "—";
+
+    return (
+      <span>
+        {arr.map((person, index) => (
+          <span key={person.id || index}>
+            <span className="cursor-pointer transition-all duration-300 hover:text-[var(--accent-main)] hover:underline">
+              {person.name}
+            </span>
+            {index < arr.length - 1 && (
+              <span className="text-[var(--text-secondary)]"> · </span>
+            )}
+          </span>
+        ))}
+      </span>
+    );
+  };
 
   // map our semantic color keys to actual CSS variable classes
   const colorClassFor = (colorKey) => {
@@ -23,20 +39,20 @@ export default function MetadataBlock() {
     return "text-[var(--text-primary)]";
   };
 
-  // Reusable row component
-  const Row = ({ category, content, color }) => {
+  // Reusable row component - updated to handle JSX content
+  const Row = ({ category, content, color, isJSX = false }) => {
     const contentColorClass = colorClassFor(color);
     return (
       <div className="flex">
         <h5 className="text-[var(--text-secondary)] font-bold text-[21px] w-[150px]">
           {category}
         </h5>
-        <p
+        <div
           className={`${contentColorClass} text-[16px] leading-[1.75]`}
           style={{ maxWidth: "calc(100% - 150px)" }}
         >
-          {content}
-        </p>
+          {isJSX ? content : <p>{content}</p>}
+        </div>
       </div>
     );
   };
@@ -49,10 +65,16 @@ export default function MetadataBlock() {
         <Row category="Synopsis" content={synopsis} color="primary" />
         <Row
           category="Director"
-          content={formatPeople(directors)}
+          content={formatPeopleWithHover(directors)}
           color="sec2"
+          isJSX={true}
         />
-        <Row category="Writers" content={formatPeople(writers)} color="sec2" />
+        <Row
+          category="Writers"
+          content={formatPeopleWithHover(writers)}
+          color="sec2"
+          isJSX={true}
+        />
       </div>
 
       {/* RIGHT SECTION (unchanged) */}

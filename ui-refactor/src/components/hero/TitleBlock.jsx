@@ -79,7 +79,7 @@ export default function TitleBlock() {
       {/* Metadata */}
       <div className="flex flex-wrap items-center gap-x-2 mt-2">
         <span
-          className="text-[var(--text-secondary)]"
+          className="text-[var(--text-secondary)] cursor-pointer hover:text-[var(--accent-main)] hover:underline"
           title={`Full release date: ${movieData.primary.release_date.full}`}
         >
           {certificationData?.year || movieData.primary.release_date.year}
@@ -88,7 +88,7 @@ export default function TitleBlock() {
         <span className="text-[var(--text-secondary)]">·</span>
 
         {/* Language first */}
-        <span className="text-[var(--text-secondary)]">
+        <span className="text-[var(--text-secondary)] cursor-pointer hover:text-[var(--accent-main)] hover:underline">
           {certificationData?.language ||
             movieData.primary.primary_language.toUpperCase()}
         </span>
@@ -97,7 +97,7 @@ export default function TitleBlock() {
         {certificationData?.certification && (
           <>
             <span className="text-[var(--text-secondary)]">·</span>
-            <span className="text-[var(--text-secondary)]">
+            <span className="text-[var(--text-secondary)] cursor-pointer hover:text-[var(--accent-main)] hover:underline">
               {certificationData.certification}
             </span>
           </>
@@ -109,7 +109,7 @@ export default function TitleBlock() {
         {movieData.primary.genres.map((genre) => (
           <li
             key={genre.id}
-            className="bg-[var(--bg-trans-15)] text-[var(--text-primary)] rounded-full px-[18px] py-[8px] text-[16px] leading-[1.75]"
+            className="bg-[var(--bg-trans-15)] text-[var(--text-primary)] rounded-full px-[18px] py-[8px] text-[16px] leading-[1.75] cursor-pointer hover:text-[var(--accent-main)] hover:underline"
           >
             {genre.name}
           </li>
