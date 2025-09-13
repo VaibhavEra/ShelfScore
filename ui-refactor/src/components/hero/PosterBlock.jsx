@@ -274,13 +274,11 @@ export default function PosterBlock() {
           onMouseEnter={() => setIsContentAreaHovered(true)}
           onMouseLeave={() => setIsContentAreaHovered(false)}
         >
-          {/* Toggle Button - Only show on hover */}
+          {/* Toggle Button - Always visible */}
           {trailers.length > 0 && (
             <button
               onClick={handleToggleContent}
-              className={`absolute top-4 right-4 z-10 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2 hover:cursor-pointer ${
-                isContentAreaHovered ? "opacity-100" : "opacity-0"
-              }`}
+              className="absolute top-4 right-4 z-10 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2 hover:cursor-pointer opacity-100"
               style={{
                 backgroundColor: "var(--bg-trans-15)",
                 color: "var(--text-primary)",
