@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useMemo } from "react";
-import { movieData } from "../data/movieDetails";
+import { movieData } from "../../data/movieDetails";
 
 export default function Sidebar() {
   const [activeSection, setActiveSection] = useState("");

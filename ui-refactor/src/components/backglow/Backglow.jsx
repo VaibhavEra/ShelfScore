@@ -8,16 +8,19 @@ function Backglow() {
       <div
         className="opacity-50 absolute"
         style={{
-          // Center horizontally and make it full width
-          left: "50%",
-          transform: "translateX(-50%) scale(1.2)",
-          top: "-50vh", // Adjust this value to control vertical positioning
-          width: "100vw", // Full viewport width
-          height: "200vh", // Tall enough to cover scroll area
+          // Converted from 164px left on 1920px width to ~8.5vw
+          left: "8.5vw",
+          // Converted from -1063px top on 1080px height to ~-98.4vh (adjusted for effect)
+          top: "-98vh",
+          // Converted from 1592px width on 1920px width to ~83vw
+          width: "83vw",
+          // Converted from 2326px height on 1080px height to ~215vh (scaled for stylized blur)
+          height: "215vh",
           backgroundImage: `url(${posterUrl})`,
           backgroundPosition: "center",
           backgroundSize: "cover",
           filter: "blur(120px)",
+          transform: "scale(1.2)",
           maskImage: `
             radial-gradient(circle, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 80%),
             linear-gradient(to bottom, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%)
@@ -35,4 +38,5 @@ function Backglow() {
     </div>
   );
 }
+
 export default Backglow;
