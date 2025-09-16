@@ -174,10 +174,7 @@ export default function CastBlock() {
               key={`${person.name}-${idx}`}
               className="flex-shrink-0 w-[181px] flex flex-col cursor-pointer group snap-start"
             >
-              <div
-                className="w-[181px] h-[181px] rounded-[20px] flex items-center justify-center overflow-hidden"
-                style={{ backgroundColor: "hsla(0,0%,64%,0.15)" }}
-              >
+              <div className="w-[181px] h-[181px] rounded-[20px] flex items-center justify-center overflow-hidden bg-[var(--bg-trans-15)]">
                 {person.profile_url ? (
                   <img
                     src={person.profile_url}
@@ -187,24 +184,18 @@ export default function CastBlock() {
                       e.target.onerror = null;
                       e.target.replaceWith(
                         (() => (
-                          <UserRound
-                            className="w-20 h-20"
-                            style={{ color: "hsl(0,0%,76%)" }}
-                          />
+                          <UserRound className="w-20 h-20 text-[var(--text-secondary)]" />
                         ))()
                       );
                     }}
                   />
                 ) : (
-                  <UserRound
-                    className="w-20 h-20"
-                    style={{ color: "hsl(0,0%,76%)" }}
-                  />
+                  <UserRound className="w-20 h-20 text-[var(--text-secondary)]" />
                 )}
               </div>
 
               <div className="h-[12px]" />
-              <p className="text-white text-[16px] leading-[1.5] font-medium transition-colors duration-200 group-hover:text-[var(--accent-main)] group-hover:underline">
+              <p className="text-[var(--text-primary)] text-[16px] leading-[1.5] font-medium transition-colors duration-200 group-hover:text-[var(--accent-main)] group-hover:underline">
                 {person.name}
               </p>
               <p className="text-[var(--text-secondary)] text-[16px] leading-[1.4]">

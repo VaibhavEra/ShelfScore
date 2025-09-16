@@ -103,7 +103,7 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
         <div className="fixed inset-0 z-50 flex items-end justify-center">
           {/* Backdrop */}
           <motion.div
-            className="fixed inset-0 bg-black/50"
+            className="fixed inset-0 bg-[var(--bg-modal)]"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -132,7 +132,7 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="flex items-start justify-between px-6 py-5 border-b border-white/15">
+            <div className="flex items-start justify-between px-6 py-5 border-b border-[var(--border-modal)]">
               <div className="flex flex-col ml-8 flex-1">
                 <div className="flex items-baseline gap-2">
                   <h2 className="text-xl font-bold text-[var(--text-primary)]">
@@ -151,7 +151,7 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
                 </h3>
               </div>
               <button
-                className="w-[42px] h-[42px] rounded-[10px] flex items-center justify-center text-[var(--text-primary)] p-2 flex-shrink-0 hover:cursor-pointer hover:bg-white/10 transition-all duration-200"
+                className="w-[42px] h-[42px] rounded-[10px] flex items-center justify-center text-[var(--text-primary)] p-2 flex-shrink-0 hover:cursor-pointer hover:bg-[var(--bg-button-hover)] transition-all duration-200"
                 onClick={onClose}
               >
                 <X className="w-6 h-6" />
@@ -161,7 +161,7 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
             {/* Main Content */}
             <div className="flex flex-1 min-h-0">
               {/* Sidebar */}
-              <div className="w-[340px] border-r border-white/15 flex flex-col ml-8">
+              <div className="w-[340px] border-r border-[var(--border-modal)] flex flex-col ml-8">
                 <div className="flex-1 overflow-y-auto px-5 py-6 custom-scroll">
                   <div className="flex flex-col gap-3">
                     {categories.map((cat, index) => {
@@ -185,7 +185,7 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
                             ${
                               isSelected
                                 ? "bg-[var(--accent-main)]/10 text-[var(--accent-main)] border-[var(--accent-main)]/20"
-                                : "text-[var(--text-primary)] hover:bg-white/5 hover:text-[var(--accent-main)] border-transparent"
+                                : "text-[var(--text-primary)] hover:bg-[var(--bg-hover-subtle)] hover:text-[var(--accent-main)] border-transparent"
                             }
                           `}
                           initial={{ opacity: 0, x: -20 }}
@@ -209,7 +209,7 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
                               className={`text-xs px-1.5 py-0.5 rounded-md transition-colors duration-200 font-medium min-w-[24px] text-center ${
                                 isSelected
                                   ? "bg-[var(--accent-main)]/20 text-[var(--accent-main)]"
-                                  : "bg-white/5 text-[var(--text-secondary)] group-hover:bg-[var(--accent-main)]/10"
+                                  : "bg-[var(--bg-hover-subtle)] text-[var(--text-secondary)] group-hover:bg-[var(--accent-main)]/10"
                               }`}
                             >
                               {count}
@@ -234,7 +234,7 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
                 </div>
 
                 {/* Sidebar Footer */}
-                <div className="px-5 py-4 border-t border-white/10">
+                <div className="px-5 py-4 border-t border-[var(--border-secondary)]">
                   <div className="text-xs text-[var(--text-secondary)] space-y-2">
                     <div className="flex justify-between items-center">
                       <span>Total People:</span>
@@ -292,12 +292,7 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.3, delay: idx * 0.05 }}
                           >
-                            <div
-                              className="w-[170px] h-[170px] rounded-[20px] flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-200"
-                              style={{
-                                backgroundColor: "hsla(0,0%,64%,0.15)", // --bg-trans-15
-                              }}
-                            >
+                            <div className="w-[170px] h-[170px] rounded-[20px] flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-200 bg-[var(--bg-trans-15)]">
                               {person.profile_url ? (
                                 <img
                                   src={person.profile_url}
@@ -309,10 +304,7 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
                                   }}
                                 />
                               ) : (
-                                <UserRound
-                                  className="w-20 h-20"
-                                  style={{ color: "hsl(0,0%,76%)" }} // --text-secondary
-                                />
+                                <UserRound className="w-20 h-20 text-[var(--text-secondary)]" />
                               )}
                             </div>
                             <div className="h-[12px]" />
@@ -352,12 +344,7 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
                                       delay: idx * 0.05,
                                     }}
                                   >
-                                    <div
-                                      className="w-[170px] h-[170px] rounded-[20px] flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-200"
-                                      style={{
-                                        backgroundColor: "hsla(0,0%,64%,0.15)", // --bg-trans-15
-                                      }}
-                                    >
+                                    <div className="w-[170px] h-[170px] rounded-[20px] flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-200 bg-[var(--bg-trans-15)]">
                                       {person.profile_url ? (
                                         <img
                                           src={person.profile_url}
@@ -374,10 +361,7 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
                                           const Icon =
                                             getCategoryIcon(selectedCategory);
                                           return (
-                                            <Icon
-                                              className="w-20 h-20"
-                                              style={{ color: "hsl(0,0%,76%)" }} // --text-secondary
-                                            />
+                                            <Icon className="w-20 h-20 text-[var(--text-secondary)]" />
                                           );
                                         })()
                                       )}
