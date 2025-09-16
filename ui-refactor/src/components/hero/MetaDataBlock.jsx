@@ -77,21 +77,21 @@ export default function MetadataBlock() {
         />
       </div>
 
-      {/* RIGHT SECTION (unchanged) */}
+      {/* RIGHT SECTION - Only text color fixed */}
       <div className="flex flex-col items-end gap-4">
-        <button className="w-[249px] h-[44px] rounded-[10px] px-[18px] py-[10px] bg-[var(--accent-main)] text-[#121212] flex items-center">
+        <button className="w-[249px] h-[44px] rounded-[10px] px-[18px] py-[10px] bg-[var(--accent-main)] text-[var(--text-primary-dark)] flex items-center">
           <span className="flex-1 text-center">Add to Watchlist</span>
           <div className="w-px h-4 mx-2 bg-[#121212] opacity-16"></div>
           <Plus size={18} />
         </button>
 
-        <button className="w-[249px] h-[44px] rounded-[10px] px-[18px] py-[10px] bg-[var(--accent-main)] text-[#121212] flex items-center">
+        <button className="w-[249px] h-[44px] rounded-[10px] px-[18px] py-[10px] bg-[var(--accent-main)] text-[var(--text-primary-dark)] flex items-center">
           <span className="flex-1 text-center">Watched</span>
           <div className="w-px h-4 mx-2 bg-[#121212] opacity-16"></div>
           <Check size={18} />
         </button>
 
-        <button className="w-[249px] h-[44px] rounded-[10px] px-[18px] py-[10px] bg-[var(--accent-main)] text-[#121212] flex items-center">
+        <button className="w-[249px] h-[44px] rounded-[10px] px-[18px] py-[10px] bg-[var(--accent-main)] text-[var(--text-primary-dark)] flex items-center">
           <span className="flex-1 text-center">Add a Review</span>
           <div className="w-px h-4 mx-2 bg-[#121212] opacity-16"></div>
           <Pencil size={18} />

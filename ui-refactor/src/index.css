@@ -10,6 +10,9 @@
   --text-primary: hsl(0, 0%, 100%);
   --text-secondary: hsl(0, 0%, 76%);
 
+  /* Dark text for light backgrounds */
+  --text-primary-dark: hsl(0, 0%, 7%); /* #121212 equivalent */
+
   /* Background */
   --bg-primary: hsl(0, 0%, 5%);
   --bg-secondary: hsl(0, 0%, 10%);
