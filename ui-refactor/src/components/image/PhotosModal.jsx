@@ -440,7 +440,7 @@ export default function PhotosModal({
         <div className="fixed inset-0 z-50 flex items-end justify-center">
           {/* Backdrop */}
           <motion.div
-            className="fixed inset-0 bg-black/50"
+            className="fixed inset-0 bg-[var(--bg-modal)]"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -458,7 +458,7 @@ export default function PhotosModal({
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header - with proper left alignment */}
-            <div className="flex items-start justify-between border-b border-white/15 pl-[90px] pr-6 py-5">
+            <div className="flex items-start justify-between border-b border-[var(--border-modal)] pl-[90px] pr-6 py-5">
               <div className="flex flex-col flex-1">
                 <div className="flex items-baseline gap-2">
                   <h2 className="text-xl font-bold text-[var(--text-primary)]">
@@ -487,11 +487,11 @@ export default function PhotosModal({
                           className="flex items-center gap-2 bg-[var(--bg-trans-15)] px-4 py-2.5 rounded-[8px] shadow-inner text-sm cursor-pointer hover:bg-[var(--accent-main)] transition-colors duration-200 group"
                           onClick={() => setIsPhotoTypeOpen(!isPhotoTypeOpen)}
                         >
-                          <Image className="w-4 h-4 text-[var(--text-secondary)] group-hover:text-[#121212]" />
-                          <span className="text-[var(--text-secondary)] group-hover:text-[#121212]">
+                          <Image className="w-4 h-4 text-[var(--text-secondary)] group-hover:text-[var(--text-primary-dark)]" />
+                          <span className="text-[var(--text-secondary)] group-hover:text-[var(--text-primary-dark)]">
                             Type:
                           </span>
-                          <span className="text-[var(--text-primary)] group-hover:text-[#121212]">
+                          <span className="text-[var(--text-primary)] group-hover:text-[var(--text-primary-dark)]">
                             {
                               photoTypeOptions.find(
                                 (opt) => opt.value === selectedPhotoType
@@ -499,7 +499,7 @@ export default function PhotosModal({
                             }
                           </span>
                           <span
-                            className={`text-xs px-1.5 py-0.5 rounded-md transition-colors duration-200 font-medium min-w-[24px] text-center bg-white/5 text-[var(--text-secondary)] group-hover:bg-[#121212]/20 group-hover:text-[#121212]`}
+                            className={`text-xs px-1.5 py-0.5 rounded-md transition-colors duration-200 font-medium min-w-[24px] text-center bg-[var(--bg-hover-subtle)] text-[var(--text-secondary)] group-hover:bg-[var(--text-primary-dark)]/20 group-hover:text-[var(--text-primary-dark)]`}
                           >
                             {photoTypeOptions.find(
                               (opt) => opt.value === selectedPhotoType
@@ -509,13 +509,13 @@ export default function PhotosModal({
                             animate={{ rotate: isPhotoTypeOpen ? 180 : 0 }}
                             transition={{ duration: 0.2 }}
                           >
-                            <ChevronDown className="w-4 h-4 text-[var(--text-secondary)] group-hover:text-[#121212]" />
+                            <ChevronDown className="w-4 h-4 text-[var(--text-secondary)] group-hover:text-[var(--text-primary-dark)]" />
                           </motion.div>
                         </button>
                         <AnimatePresence>
                           {isPhotoTypeOpen && (
                             <motion.div
-                              className="absolute top-full left-0 mt-1 bg-[var(--dropdown-bg)] border border-white/15 rounded-[8px] shadow-lg z-20 min-w-full"
+                              className="absolute top-full left-0 mt-1 bg-[var(--dropdown-bg)] border border-[var(--border-modal)] rounded-[8px] shadow-lg z-20 min-w-full"
                               initial={{ opacity: 0, y: -10 }}
                               animate={{ opacity: 1, y: 0 }}
                               exit={{ opacity: 0, y: -10 }}
@@ -529,7 +529,7 @@ export default function PhotosModal({
                                     key={option.value}
                                     className={`w-full text-left px-4 py-2.5 text-sm cursor-pointer first:rounded-t-[8px] last:rounded-b-[8px] transition-colors duration-200 flex justify-between items-center group ${
                                       isSelected
-                                        ? "bg-[var(--dropdown-selected)] text-[#121212]"
+                                        ? "bg-[var(--dropdown-selected)] text-[var(--text-primary-dark)]"
                                         : "text-[var(--text-primary)] hover:bg-[var(--dropdown-hover)]"
                                     }`}
                                     onClick={() =>
@@ -543,8 +543,8 @@ export default function PhotosModal({
                                     <span
                                       className={`text-xs px-1.5 py-0.5 rounded-md transition-colors duration-200 font-medium min-w-[24px] text-center ${
                                         isSelected
-                                          ? "bg-[#121212]/20 text-[#121212]"
-                                          : "bg-white/5 text-[var(--text-secondary)] group-hover:bg-white/10 group-hover:text-[var(--text-primary)]"
+                                          ? "bg-[var(--text-primary-dark)]/20 text-[var(--text-primary-dark)]"
+                                          : "bg-[var(--bg-hover-subtle)] text-[var(--text-secondary)] group-hover:bg-[var(--bg-hover-subtle)] group-hover:text-[var(--text-primary)]"
                                       }`}
                                     >
                                       {option.count}
@@ -563,11 +563,11 @@ export default function PhotosModal({
                           className="flex items-center gap-2 bg-[var(--bg-trans-15)] px-4 py-2.5 rounded-[8px] shadow-inner text-sm cursor-pointer hover:bg-[var(--accent-main)] transition-colors duration-200 group"
                           onClick={() => setIsLanguageOpen(!isLanguageOpen)}
                         >
-                          <Languages className="w-4 h-4 text-[var(--text-secondary)] group-hover:text-[#121212] flex-shrink-0" />
-                          <span className="text-[var(--text-secondary)] group-hover:text-[#121212] flex-shrink-0">
+                          <Languages className="w-4 h-4 text-[var(--text-secondary)] group-hover:text-[var(--text-primary-dark)] flex-shrink-0" />
+                          <span className="text-[var(--text-secondary)] group-hover:text-[var(--text-primary-dark)] flex-shrink-0">
                             Language:
                           </span>
-                          <span className="text-[var(--text-primary)] group-hover:text-[#121212] whitespace-nowrap">
+                          <span className="text-[var(--text-primary)] group-hover:text-[var(--text-primary-dark)] whitespace-nowrap">
                             {getCurrentLanguageLabel()}
                           </span>
                           <motion.div
@@ -575,13 +575,13 @@ export default function PhotosModal({
                             transition={{ duration: 0.2 }}
                             className="flex-shrink-0"
                           >
-                            <ChevronDown className="w-4 h-4 text-[var(--text-secondary)] group-hover:text-[#121212]" />
+                            <ChevronDown className="w-4 h-4 text-[var(--text-secondary)] group-hover:text-[var(--text-primary-dark)]" />
                           </motion.div>
                         </button>
                         <AnimatePresence>
                           {isLanguageOpen && (
                             <motion.div
-                              className="absolute top-full left-0 mt-1 bg-[var(--dropdown-bg)] border border-white/15 rounded-[8px] shadow-lg z-20 w-full max-h-60 overflow-y-auto dropdown-scrollbar"
+                              className="absolute top-full left-0 mt-1 bg-[var(--dropdown-bg)] border border-[var(--border-modal)] rounded-[8px] shadow-lg z-20 w-full max-h-60 overflow-y-auto dropdown-scrollbar"
                               initial={{ opacity: 0, y: -10 }}
                               animate={{ opacity: 1, y: 0 }}
                               exit={{ opacity: 0, y: -10 }}
@@ -592,7 +592,7 @@ export default function PhotosModal({
                                   key={option.value}
                                   className={`w-full text-left px-4 py-2.5 text-sm cursor-pointer first:rounded-t-[8px] last:rounded-b-[8px] transition-colors duration-200 flex justify-between items-center group ${
                                     selectedLanguage === option.value
-                                      ? "bg-[var(--dropdown-selected)] text-[#121212]"
+                                      ? "bg-[var(--dropdown-selected)] text-[var(--text-primary-dark)]"
                                       : "text-[var(--text-primary)] hover:bg-[var(--dropdown-hover)]"
                                   }`}
                                   onClick={() =>
@@ -608,8 +608,8 @@ export default function PhotosModal({
                                   <span
                                     className={`text-xs px-1.5 py-0.5 rounded-md transition-colors duration-200 font-medium min-w-[24px] text-center flex-shrink-0 ${
                                       selectedLanguage === option.value
-                                        ? "bg-[#121212]/20 text-[#121212]"
-                                        : "bg-white/5 text-[var(--text-secondary)] group-hover:bg-white/10 group-hover:text-[var(--text-primary)]"
+                                        ? "bg-[var(--text-primary-dark)]/20 text-[var(--text-primary-dark)]"
+                                        : "bg-[var(--bg-hover-subtle)] text-[var(--text-secondary)] group-hover:bg-[var(--bg-hover-subtle)] group-hover:text-[var(--text-primary)]"
                                     }`}
                                   >
                                     {getLanguageCount(option.value)}
@@ -682,7 +682,7 @@ export default function PhotosModal({
                                 className={`w-[236px] h-[236px] rounded-[3px] overflow-hidden group-hover:scale-105 transition-transform duration-200 ${
                                   selectedPhotoType === "logos"
                                     ? "bg-[var(--bg-primary)]"
-                                    : "bg-gray-300"
+                                    : "bg-[var(--bg-secondary)]"
                                 }`}
                               >
                                 <img
@@ -751,7 +751,7 @@ export default function PhotosModal({
                             disabled={isAnimating}
                             className={`w-[36px] h-[36px] flex items-center justify-center rounded-full transition-colors duration-200 ${
                               validCurrentPage === page
-                                ? "bg-[var(--accent-main)] text-[#121212]"
+                                ? "bg-[var(--accent-main)] text-[var(--text-primary-dark)]"
                                 : "bg-[var(--bg-trans-15)] text-[var(--text-primary)] hover:bg-[var(--bg-trans-60)] cursor-pointer"
                             } ${
                               isAnimating ? "cursor-not-allowed opacity-50" : ""

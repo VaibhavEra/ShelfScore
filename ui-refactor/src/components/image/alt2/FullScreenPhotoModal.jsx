@@ -18,7 +18,7 @@ export default function FullScreenPhotoModal({ photo, onClose }) {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 flex items-center justify-center z-50 bg-black/85"
+        className="fixed inset-0 flex items-center justify-center z-50 bg-[var(--bg-modal)]"
         style={{
           backdropFilter: "blur(8px)",
           padding: "60px 20px",
@@ -31,7 +31,7 @@ export default function FullScreenPhotoModal({ photo, onClose }) {
       >
         {/* Close button */}
         <button
-          className="absolute top-6 right-6 w-[52px] h-[52px] rounded-[10px] flex items-center justify-center text-[var(--text-primary)] p-2 flex-shrink-0 bg-white/10 hover:bg-white/20 hover:cursor-pointer transition-colors duration-200"
+          className="absolute top-6 right-6 w-[52px] h-[52px] rounded-[10px] flex items-center justify-center text-[var(--text-primary)] p-2 flex-shrink-0 bg-[var(--bg-button-trans)] hover:bg-[var(--bg-button-hover)] hover:cursor-pointer transition-colors duration-200"
           onClick={(e) => {
             e.stopPropagation();
             onClose();
@@ -48,7 +48,7 @@ export default function FullScreenPhotoModal({ photo, onClose }) {
           className="max-w-full max-h-full object-contain"
           style={{
             borderRadius: "8px",
-            boxShadow: "0 20px 60px rgba(0, 0, 0, 0.4)",
+            boxShadow: "var(--shadow-modal)",
           }}
           initial={{ opacity: 0, y: 30, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
