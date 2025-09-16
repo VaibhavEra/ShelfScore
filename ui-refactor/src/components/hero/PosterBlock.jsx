@@ -56,18 +56,18 @@ function TrailerCarousel({
           />
         ) : (
           <div
-            className="w-full h-full bg-gray-800 flex items-center justify-center"
+            className="w-full h-full bg-[var(--bg-secondary)] flex items-center justify-center"
             style={{ borderRadius: "4px" }}
           >
-            <CirclePlay size={48} className="text-white/60" />
+            <CirclePlay size={48} className="text-[var(--text-muted)]" />
           </div>
         )}
 
         {/* Play button overlay - Only CirclePlay icon */}
-        <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors duration-300">
+        <div className="absolute inset-0 flex items-center justify-center bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay-hover)] transition-colors duration-300">
           <CirclePlay
             size={64}
-            className="text-white hover:cursor-pointer transition-all duration-200 group-hover:scale-110"
+            className="text-[var(--text-primary)] hover:cursor-pointer transition-all duration-200 group-hover:scale-110"
           />
         </div>
       </div>
@@ -86,8 +86,8 @@ function TrailerCarousel({
                 }}
                 className={`w-2 h-2 rounded-full transition-colors duration-200 hover:cursor-pointer ${
                   index === currentIndex
-                    ? "bg-white"
-                    : "bg-white/50 hover:bg-white/70"
+                    ? "bg-[var(--text-primary)]"
+                    : "bg-[var(--text-muted)] hover:bg-[var(--text-secondary)]"
                 }`}
                 aria-label={`Go to trailer ${index + 1}`}
               />
@@ -228,14 +228,14 @@ export default function PosterBlock() {
             className="absolute inset-0 flex items-center justify-center"
             style={{
               borderRadius: "4px",
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              backgroundColor: "var(--bg-overlay)",
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: isPosterHovered ? 1 : 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
           >
             <motion.div
-              className="flex items-center gap-2 text-white"
+              className="flex items-center gap-2 text-[var(--text-primary)]"
               initial={{ y: 10, scale: 0.9 }}
               animate={{
                 y: isPosterHovered ? 0 : 10,
@@ -247,13 +247,13 @@ export default function PosterBlock() {
               <Expand
                 size={24}
                 style={{
-                  filter: "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5))",
+                  filter: "var(--shadow-drop)",
                 }}
               />
               <span
                 className="text-sm font-medium"
                 style={{
-                  filter: "drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5))",
+                  filter: "var(--shadow-drop-small)",
                 }}
               >
                 Expand
@@ -347,7 +347,7 @@ export default function PosterBlock() {
                     onPlay={handlePlayTrailer}
                   />
                 ) : (
-                  <div className="flex items-center justify-center w-full h-full bg-gray-800 text-white rounded">
+                  <div className="flex items-center justify-center w-full h-full bg-[var(--bg-secondary)] text-[var(--text-primary)] rounded">
                     <span>No trailers available</span>
                   </div>
                 )}
@@ -361,7 +361,7 @@ export default function PosterBlock() {
       <AnimatePresence>
         {showFullPoster && (
           <motion.div
-            className="fixed inset-0 flex items-center justify-center z-50 bg-black/85"
+            className="fixed inset-0 flex items-center justify-center z-50 bg-[var(--bg-modal)]"
             style={{
               backdropFilter: "blur(8px)",
               padding: "60px 20px",
@@ -374,7 +374,7 @@ export default function PosterBlock() {
           >
             {/* Close button with pointer cursor */}
             <button
-              className="absolute top-6 right-6 w-[52px] h-[52px] rounded-[10px] flex items-center justify-center text-[var(--text-primary)] p-2 flex-shrink-0 bg-white/10 hover:bg-white/20 hover:cursor-pointer transition-colors duration-200"
+              className="absolute top-6 right-6 w-[52px] h-[52px] rounded-[10px] flex items-center justify-center text-[var(--text-primary)] p-2 flex-shrink-0 bg-[var(--bg-button-trans)] hover:bg-[var(--bg-button-hover)] hover:cursor-pointer transition-colors duration-200"
               onClick={(e) => {
                 e.stopPropagation();
                 handleCloseModal();
@@ -391,7 +391,7 @@ export default function PosterBlock() {
               className="max-w-full max-h-full object-contain"
               style={{
                 borderRadius: "8px",
-                boxShadow: "0 20px 60px rgba(0, 0, 0, 0.4)",
+                boxShadow: "var(--shadow-modal)",
               }}
               initial={{ opacity: 0, y: 30, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
