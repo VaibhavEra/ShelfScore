@@ -153,7 +153,7 @@ export default function RelatedMoviesBlock() {
           {filteredMovies.map((movie) => (
             <div
               key={movie.id}
-              className="flex-shrink-0 w-[234px] bg-[rgba(255,255,255,0.05)] rounded-[10px] p-[15px] flex flex-col gap-[17px] snap-start"
+              className="flex-shrink-0 w-[234px] bg-[var(--bg-hover-subtle)] rounded-[10px] p-[15px] flex flex-col gap-[17px] snap-start"
             >
               {/* Poster */}
               <img
@@ -171,7 +171,7 @@ export default function RelatedMoviesBlock() {
               <div className="flex gap-auto w-[204px] h-[42px] items-center justify-between">
                 {/* Rating */}
                 <div className="flex items-center justify-center gap-[5px] h-[42px] px-[7px] rounded-[10px]">
-                  <Star size={24} className="text-yellow-400" />
+                  <Star size={24} className="text-[var(--accent-main)]" />
                   <p className="text-[var(--text-primary)] text-[14px] font-medium">
                     N/A
                   </p>
@@ -191,8 +191,10 @@ export default function RelatedMoviesBlock() {
                 aria-label={`Add ${movie.title} to Watchlist`}
                 className="flex items-center justify-center gap-[8px] w-full h-[42px] rounded-[10px] bg-[var(--accent-main)] hover:opacity-90 transition-colors duration-200"
               >
-                <span className="text-lg text-[#121212]">+</span>
-                <p className="text-[14px] font-medium text-[#121212]">
+                <span className="text-lg text-[var(--text-primary-dark)]">
+                  +
+                </span>
+                <p className="text-[14px] font-medium text-[var(--text-primary-dark)]">
                   Add to Watchlist
                 </p>
               </button>
