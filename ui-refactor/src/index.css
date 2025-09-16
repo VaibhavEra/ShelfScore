@@ -58,6 +58,26 @@
 
   /* Subtle Hover States */
   --bg-hover-subtle: hsla(0, 0%, 100%, 0.05);
+
+  /* Video-specific backgrounds */
+  --bg-video: #000000; /* Pure black for video backgrounds */
+
+  /* Modal action elements */
+  --bg-modal-action: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Semi-transparent white for modal buttons */
+  --bg-modal-action-hover: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); /* Hover state for modal buttons */
+
+  /* Video shadows */
+  --shadow-video: 0 20px 60px rgba(0, 0, 0, 0.4); /* Deep shadow for video players */
 }
 
 /* 3. Base Styles */

@@ -37,7 +37,7 @@ export default function VideoPlayerModal({ isOpen, onClose, video }) {
     <AnimatePresence>
       {isOpen && video && (
         <motion.div
-          className="fixed inset-0 flex items-center justify-center z-50 bg-black/85"
+          className="fixed inset-0 flex items-center justify-center z-50 bg-[var(--bg-modal)]"
           style={{
             backdropFilter: "blur(8px)",
             padding: "60px 20px",
@@ -50,7 +50,7 @@ export default function VideoPlayerModal({ isOpen, onClose, video }) {
         >
           {/* Close button */}
           <button
-            className="absolute top-6 right-6 w-[52px] h-[52px] rounded-[10px] flex items-center justify-center text-[var(--text-primary)] p-2 flex-shrink-0 bg-white/10 hover:bg-white/20 hover:cursor-pointer transition-colors duration-200"
+            className="absolute top-6 right-6 w-[52px] h-[52px] rounded-[10px] flex items-center justify-center text-[var(--text-primary)] p-2 flex-shrink-0 bg-[var(--bg-modal-action)] hover:bg-[var(--bg-modal-action-hover)] hover:cursor-pointer transition-colors duration-200"
             onClick={(e) => {
               e.stopPropagation();
               onClose();
@@ -80,7 +80,7 @@ export default function VideoPlayerModal({ isOpen, onClose, video }) {
               allowFullScreen
               className="rounded-[10px]"
               style={{
-                boxShadow: "0 20px 60px rgba(0, 0, 0, 0.4)",
+                boxShadow: "var(--shadow-video)",
                 maxWidth: "100%",
                 maxHeight: "calc(100vh - 200px)",
               }}

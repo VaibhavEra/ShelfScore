@@ -193,7 +193,7 @@ export default function VideoBlock() {
                 <YouTubeThumbnail
                   videoKey={video.key}
                   alt={video.name}
-                  className="w-[409px] h-[261px] rounded-[10px] object-contain bg-black"
+                  className="w-[409px] h-[261px] rounded-[10px] object-contain bg-[var(--bg-video)]"
                   containerClassName="w-full h-full"
                   fallbackIcon={ImageOff}
                   fallbackIconSize={64}
