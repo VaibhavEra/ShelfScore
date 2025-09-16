@@ -254,7 +254,7 @@ export default function ReleaseDatesBlock({ releaseData }) {
                           onMouseLeave={() => setHoveredTab(null)}
                           className={`cursor-pointer flex items-center justify-center h-[46px] rounded-[10px] relative z-10 transition-all duration-300 ease-out px-[16px] ${
                             isActive
-                              ? "text-[#121212] font-medium"
+                              ? "text-[var(--text-primary-dark)] font-medium"
                               : hoveredTab === tab
                               ? "text-[var(--accent-main)] bg-[var(--bg-trans-15)]"
                               : "text-[var(--text-primary)] hover:text-[var(--text-secondary)]"

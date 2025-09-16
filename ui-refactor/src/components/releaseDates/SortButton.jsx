@@ -13,17 +13,17 @@ export default function SortButton({ sortMode, onChange }) {
       {isByDate ? (
         <Calendar
           size={16}
-          className="transition-colors duration-300 flex-shrink-0 text-[var(--text-primary)] group-hover:text-[#121212]"
+          className="transition-colors duration-300 flex-shrink-0 text-[var(--text-primary)] group-hover:text-[var(--text-primary-dark)]"
         />
       ) : (
         <Globe
           size={16}
-          className="transition-colors duration-300 flex-shrink-0 text-[var(--text-primary)] group-hover:text-[#121212]"
+          className="transition-colors duration-300 flex-shrink-0 text-[var(--text-primary)] group-hover:text-[var(--text-primary-dark)]"
         />
       )}
 
       {/* Sort Text with Current Mode */}
-      <span className="text-sm font-medium transition-colors duration-300 whitespace-nowrap ml-[8px] text-[var(--text-primary)] group-hover:text-[#121212]">
+      <span className="text-sm font-medium transition-colors duration-300 whitespace-nowrap ml-[8px] text-[var(--text-primary)] group-hover:text-[var(--text-primary-dark)]">
         Sort by: {isByDate ? "Date" : "Country"}
       </span>
     </button>

@@ -13,7 +13,7 @@ export default function ViewButton({ viewMode, onChange, disabled = false }) {
       disabled={disabled}
       className={`flex items-center px-[16px] py-[10px] rounded-[12px] transition-all duration-300 group h-[46px] ${
         disabled
-          ? "bg-[var(--bg-trans-8)] opacity-50 cursor-not-allowed"
+          ? "bg-[var(--bg-trans-5)] opacity-50 cursor-not-allowed"
           : "bg-[var(--bg-trans-15)] hover:bg-[var(--accent-main)] hover:shadow-lg cursor-pointer"
       }`}
       title={
@@ -29,7 +29,7 @@ export default function ViewButton({ viewMode, onChange, disabled = false }) {
           className={`transition-colors duration-300 flex-shrink-0 ${
             disabled
               ? "text-[var(--text-secondary)]"
-              : "text-[var(--text-primary)] group-hover:text-[#121212]"
+              : "text-[var(--text-primary)] group-hover:text-[var(--text-primary-dark)]"
           }`}
         />
       ) : (
@@ -38,7 +38,7 @@ export default function ViewButton({ viewMode, onChange, disabled = false }) {
           className={`transition-colors duration-300 flex-shrink-0 ${
             disabled
               ? "text-[var(--text-secondary)]"
-              : "text-[var(--text-primary)] group-hover:text-[#121212]"
+              : "text-[var(--text-primary)] group-hover:text-[var(--text-primary-dark)]"
           }`}
         />
       )}
@@ -48,7 +48,7 @@ export default function ViewButton({ viewMode, onChange, disabled = false }) {
         className={`text-sm font-medium transition-colors duration-300 whitespace-nowrap ml-[8px] ${
           disabled
             ? "text-[var(--text-secondary)]"
-            : "text-[var(--text-primary)] group-hover:text-[#121212]"
+            : "text-[var(--text-primary)] group-hover:text-[var(--text-primary-dark)]"
         }`}
       >
         View

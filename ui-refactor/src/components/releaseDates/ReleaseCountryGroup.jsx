@@ -18,7 +18,7 @@ export default function ReleaseCountryGroup({ countryCode, releases }) {
             width: "20px",
             height: "15px",
             objectFit: "cover",
-            boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
+            boxShadow: "var(--shadow-drop-small)",
           }}
         />
       );
@@ -26,12 +26,12 @@ export default function ReleaseCountryGroup({ countryCode, releases }) {
 
     return (
       <div
-        className="rounded-sm bg-gray-400 flex items-center justify-center flex-shrink-0"
+        className="rounded-sm bg-[var(--bg-trans-60)] flex items-center justify-center flex-shrink-0"
         style={{
           width: "20px",
           height: "15px",
           fontSize: "6px",
-          color: "#fff",
+          color: "var(--text-primary)",
           fontWeight: "bold",
         }}
       >
@@ -68,7 +68,7 @@ export default function ReleaseCountryGroup({ countryCode, releases }) {
                 <>
                   <span className="text-[var(--text-secondary)]">•</span>
                   <span
-                    className={`text-white text-xs font-semibold px-[4px] py-[1px] rounded-[3px] ${getCertificationColor(
+                    className={`text-[var(--text-primary)] text-xs font-semibold px-[4px] py-[1px] rounded-[3px] ${getCertificationColor(
                       release.certification
                     )}`}
                   >

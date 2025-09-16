@@ -209,7 +209,7 @@ export default function ReleaseCountrySelector({
             width: "28px",
             height: "21px",
             borderRadius: "3px",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
+            boxShadow: "var(--shadow-drop-small)",
           }}
         />
       );
@@ -222,7 +222,7 @@ export default function ReleaseCountrySelector({
           height: "21px",
           borderRadius: "3px",
           backgroundColor: "var(--bg-trans-60)",
-          border: "1px solid var(--bg-trans-30)",
+          border: "1px solid var(--border-secondary)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -254,7 +254,7 @@ export default function ReleaseCountrySelector({
         >
           {/* Search Bar */}
           <motion.div
-            className="bg-[var(--bg-trans-10)] rounded-[12px] p-[16px] mb-[20px]"
+            className="rounded-[12px] p-[16px] mb-[20px]"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.1 }}
@@ -305,7 +305,7 @@ export default function ReleaseCountrySelector({
 
           {/* Countries Grid */}
           <motion.div
-            className="bg-[var(--bg-trans-10)] rounded-[12px] p-[16px]"
+            className="rounded-[12px] p-[16px]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.2 }}
@@ -409,7 +409,7 @@ export default function ReleaseCountrySelector({
                               : focusedIndex === index ||
                                 hoveredCountry === country.iso_3166_1
                               ? "bg-[var(--accent-main)] bg-opacity-20 border-2 border-[var(--accent-main)] shadow-md"
-                              : "bg-[var(--bg-trans-15)] border-2 border-transparent hover:bg-[var(--bg-trans-20)] hover:border-[#9CA3AF]"
+                              : "bg-[var(--bg-trans-15)] border-2 border-transparent hover:bg-[var(--bg-trans-60)] hover:border-[var(--border-secondary)]"
                           }`}
                         >
                           {/* Country Flag */}
@@ -427,10 +427,10 @@ export default function ReleaseCountrySelector({
                                 <p
                                   className={`font-semibold text-sm truncate transition-colors duration-200 leading-tight ${
                                     isSelected
-                                      ? "text-[#121212]"
+                                      ? "text-[var(--text-primary-dark)]"
                                       : focusedIndex === index ||
                                         hoveredCountry === country.iso_3166_1
-                                      ? "text-[#121212]"
+                                      ? "text-[var(--text-primary-dark)]"
                                       : "text-[var(--text-primary)]"
                                   }`}
                                 >
@@ -443,11 +443,11 @@ export default function ReleaseCountrySelector({
                                     <p
                                       className={`text-xs truncate mt-[2px] transition-colors duration-200 leading-tight ${
                                         isSelected
-                                          ? "text-[#2a2a2a] opacity-90"
+                                          ? "text-[var(--text-primary-dark)] opacity-75"
                                           : focusedIndex === index ||
                                             hoveredCountry ===
                                               country.iso_3166_1
-                                          ? "text-[#2a2a2a] opacity-90"
+                                          ? "text-[var(--text-primary-dark)] opacity-75"
                                           : "text-[var(--text-secondary)] opacity-75"
                                       }`}
                                     >
@@ -461,10 +461,10 @@ export default function ReleaseCountrySelector({
                                 <span
                                   className={`text-xs font-mono transition-colors duration-200 ${
                                     isSelected
-                                      ? "text-[#121212] font-semibold"
+                                      ? "text-[var(--text-primary-dark)] font-semibold"
                                       : focusedIndex === index ||
                                         hoveredCountry === country.iso_3166_1
-                                      ? "text-[#121212] font-semibold"
+                                      ? "text-[var(--text-primary-dark)] font-semibold"
                                       : "text-[var(--text-secondary)] opacity-75"
                                   }`}
                                 >
@@ -472,8 +472,8 @@ export default function ReleaseCountrySelector({
                                 </span>
                                 {/* Selection Indicator */}
                                 {isSelected && (
-                                  <div className="flex items-center justify-center w-[20px] h-[20px] bg-[#121212] rounded-full ml-[8px]">
-                                    <span className="text-white text-xs">
+                                  <div className="flex items-center justify-center w-[20px] h-[20px] bg-[var(--text-primary-dark)] rounded-full ml-[8px]">
+                                    <span className="text-[var(--text-primary)] text-xs">
                                       ✓
                                     </span>
                                   </div>

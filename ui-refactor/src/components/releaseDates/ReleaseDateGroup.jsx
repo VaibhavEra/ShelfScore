@@ -37,7 +37,7 @@ export default function ReleaseDateGroup({
           style={{
             ...dimensions,
             objectFit: "cover",
-            boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
+            boxShadow: "var(--shadow-drop-small)",
           }}
         />
       );
@@ -45,11 +45,11 @@ export default function ReleaseDateGroup({
 
     return (
       <div
-        className="rounded-sm bg-gray-400 flex items-center justify-center flex-shrink-0"
+        className="rounded-sm bg-[var(--bg-trans-60)] flex items-center justify-center flex-shrink-0"
         style={{
           ...dimensions,
           fontSize: size === "lg" ? "6px" : "5px",
-          color: "#fff",
+          color: "var(--text-primary)",
           fontWeight: "bold",
         }}
       >
@@ -62,10 +62,8 @@ export default function ReleaseDateGroup({
     <div className="pb-[30px] border-b border-[var(--bg-trans-15)] last:border-b-0 last:pb-0">
       {/* Date Header - Always visible with optional collapsible behavior */}
       <div
-        className={`bg-[var(--bg-trans-8)] p-[16px] rounded-[12px] mb-0 ${
-          collapsible
-            ? "cursor-pointer hover:bg-[var(--bg-trans-12)] transition-colors duration-200"
-            : ""
+        className={`p-[16px] rounded-[12px] mb-0 ${
+          collapsible ? "cursor-pointer transition-colors duration-200" : ""
         }`}
         onClick={collapsible ? onToggle : undefined}
       >
@@ -94,7 +92,7 @@ export default function ReleaseDateGroup({
                   />
                 ))}
                 {uniqueCountries.length > 10 && (
-                  <div className="bg-[var(--bg-trans-20)] rounded-sm px-[6px] py-[2px] ml-[4px]">
+                  <div className="rounded-sm px-[6px] py-[2px] ml-[4px]">
                     <span className="text-xs text-[var(--text-secondary)] font-medium">
                       +{uniqueCountries.length - 10}
                     </span>
@@ -145,7 +143,7 @@ export default function ReleaseDateGroup({
                       <>
                         <span className="text-[var(--text-secondary)]">•</span>
                         <span
-                          className={`text-white text-xs font-semibold px-[4px] py-[1px] rounded-[3px] ${getCertificationColor(
+                          className={`text-[var(--text-primary)] text-xs font-semibold px-[4px] py-[1px] rounded-[3px] ${getCertificationColor(
                             release.certification
                           )}`}
                         >

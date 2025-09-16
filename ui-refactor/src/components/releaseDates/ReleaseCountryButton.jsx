@@ -20,7 +20,7 @@ export default function ReleaseCountryButton({
             width: "20px",
             height: "15px",
             borderRadius: "2px",
-            boxShadow: "0 1px 2px rgba(0,0,0,0.2)",
+            boxShadow: "var(--shadow-drop-small)",
           }}
         />
       );
@@ -45,8 +45,8 @@ export default function ReleaseCountryButton({
         size={16}
         className={`transition-colors duration-300 flex-shrink-0 ${
           isActive
-            ? "text-[#121212]"
-            : "text-[var(--text-primary)] group-hover:text-[#121212]"
+            ? "text-[var(--text-primary-dark)]"
+            : "text-[var(--text-primary)] group-hover:text-[var(--text-primary-dark)]"
         }`}
       />
 
@@ -62,8 +62,8 @@ export default function ReleaseCountryButton({
               <span
                 className={`text-xs transition-colors duration-300 ml-[2px] ${
                   isActive
-                    ? "text-[#121212]"
-                    : "text-[var(--text-primary)] group-hover:text-[#121212]"
+                    ? "text-[var(--text-primary-dark)]"
+                    : "text-[var(--text-primary)] group-hover:text-[var(--text-primary-dark)]"
                 }`}
               >
                 +{selectedCountries.length - 3}
@@ -74,8 +74,8 @@ export default function ReleaseCountryButton({
           <span
             className={`text-sm font-medium transition-colors duration-300 whitespace-nowrap ${
               isActive
-                ? "text-[#121212]"
-                : "text-[var(--text-primary)] group-hover:text-[#121212]"
+                ? "text-[var(--text-primary-dark)]"
+                : "text-[var(--text-primary)] group-hover:text-[var(--text-primary-dark)]"
             }`}
           >
             Filter
@@ -84,7 +84,7 @@ export default function ReleaseCountryButton({
 
         {/* Active indicator badge */}
         {hasSelectedCountries && (
-          <span className="bg-[#121212] text-white rounded-full px-[6px] py-[1px] text-xs font-semibold whitespace-nowrap">
+          <span className="bg-[var(--text-primary-dark)] text-[var(--text-primary)] rounded-full px-[6px] py-[1px] text-xs font-semibold whitespace-nowrap">
             {selectedCountries.length}
           </span>
         )}
@@ -95,8 +95,8 @@ export default function ReleaseCountryButton({
         size={16}
         className={`transition-all duration-300 flex-shrink-0 ${
           isActive
-            ? "rotate-180 text-[#121212]"
-            : "rotate-0 text-[var(--text-primary)] group-hover:text-[#121212]"
+            ? "rotate-180 text-[var(--text-primary-dark)]"
+            : "rotate-0 text-[var(--text-primary)] group-hover:text-[var(--text-primary-dark)]"
         }`}
       />
     </div>
