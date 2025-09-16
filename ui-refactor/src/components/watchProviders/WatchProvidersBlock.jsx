@@ -143,7 +143,7 @@ export default function WatchProvidersBlock() {
                         onMouseLeave={() => setHoveredTab(null)}
                         className={`cursor-pointer flex items-center justify-center w-[74px] h-[46px] rounded-[10px] relative z-10 transition-all duration-300 ease-out ${
                           activeTab === tab
-                            ? "text-[#121212] font-medium"
+                            ? "text-[var(--text-primary-dark)] font-medium"
                             : hoveredTab === tab
                             ? "text-[var(--accent-main)] bg-[var(--bg-trans-15)]"
                             : "text-[var(--text-primary)] hover:text-[var(--text-secondary)]"
@@ -215,7 +215,7 @@ export default function WatchProvidersBlock() {
                       className="flex flex-col items-center gap-[10px] cursor-pointer transition-all duration-300"
                       title={`Watch on ${provider.provider_name}`}
                     >
-                      <div className="relative overflow-hidden rounded-[10px] w-[66px] h-[66px] flex items-center justify-center bg-[var(--bg-trans-10)]">
+                      <div className="relative overflow-hidden rounded-[10px] w-[66px] h-[66px] flex items-center justify-center bg-[var(--bg-trans-15)]">
                         <img
                           src={getTMDBImageUrl(provider.logo_url, "original")}
                           alt={provider.provider_name}

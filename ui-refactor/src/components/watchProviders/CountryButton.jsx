@@ -14,7 +14,7 @@ export default function CountryButton({ selectedCountry, onClick, isActive }) {
             width: "20px",
             height: "15px",
             borderRadius: "2px",
-            boxShadow: "0 1px 2px rgba(0,0,0,0.2)",
+            boxShadow: "var(--shadow-drop-small)",
           }}
         />
       );
@@ -42,8 +42,8 @@ export default function CountryButton({ selectedCountry, onClick, isActive }) {
       <span
         className={`text-sm font-medium transition-colors duration-300 ${
           isActive
-            ? "text-[#121212]"
-            : "text-[var(--text-primary)] group-hover:text-[#121212]"
+            ? "text-[var(--text-primary-dark)]"
+            : "text-[var(--text-primary)] group-hover:text-[var(--text-primary-dark)]"
         }`}
       >
         {getCountryName(selectedCountry)}
@@ -53,8 +53,8 @@ export default function CountryButton({ selectedCountry, onClick, isActive }) {
         size={16}
         className={`transition-all duration-300 ${
           isActive
-            ? "rotate-180 text-[#121212]"
-            : "rotate-0 text-[var(--text-primary)] group-hover:text-[#121212]"
+            ? "rotate-180 text-[var(--text-primary-dark)]"
+            : "rotate-0 text-[var(--text-primary)] group-hover:text-[var(--text-primary-dark)]"
         }`}
       />
     </div>
