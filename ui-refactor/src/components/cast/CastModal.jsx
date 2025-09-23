@@ -15,6 +15,7 @@ import {
   Sparkles,
   UsersRound,
   SunMedium,
+  Search,
 } from "lucide-react";
 import { movieData } from "../../data/castandcrewdata";
 
@@ -26,7 +27,9 @@ function getTMDBImageUrl(profilePath, size = "w185") {
 
 export default function CastAndCrewModal({ isOpen, onClose, movie }) {
   const [selectedCategory, setSelectedCategory] = useState("Cast");
+  const [searchQuery, setSearchQuery] = useState("");
   const contentRef = useRef(null);
+  const searchInputRef = useRef(null);
 
   // Lock background scroll & reset scroll on open/close
   useEffect(() => {
@@ -46,21 +49,29 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
     };
   }, [isOpen]);
 
-  // Reset category to "Cast" on modal open
+  // Reset category to "Cast" and clear search on modal open
   useEffect(() => {
     if (isOpen) {
       setSelectedCategory("Cast");
+      setSearchQuery("");
     }
   }, [isOpen]);
 
   // ESC key closes modal
   useEffect(() => {
     const handleEsc = (e) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        if (searchQuery) {
+          setSearchQuery("");
+          searchInputRef.current?.blur();
+        } else {
+          onClose();
+        }
+      }
     };
     window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
-  }, [onClose]);
+  }, [onClose, searchQuery]);
 
   // Sidebar categories (without Director)
   const categories = ["Cast", ...Object.keys(movieData.crew || {})];
@@ -84,6 +95,35 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
     return iconMap[category] || UsersRound;
   };
 
+  // Filter function for search
+  const filterBySearch = (people, query) => {
+    if (!query.trim()) return people;
+    const searchTerm = query.toLowerCase().trim();
+
+    if (Array.isArray(people)) {
+      return people.filter(
+        (person) =>
+          person.name.toLowerCase().includes(searchTerm) ||
+          person.character?.toLowerCase().includes(searchTerm) ||
+          person.job?.toLowerCase().includes(searchTerm)
+      );
+    } else {
+      // For crew data (object of job -> people arrays)
+      const filtered = {};
+      Object.entries(people).forEach(([job, jobPeople]) => {
+        const filteredPeople = jobPeople.filter(
+          (person) =>
+            person.name.toLowerCase().includes(searchTerm) ||
+            job.toLowerCase().includes(searchTerm)
+        );
+        if (filteredPeople.length > 0) {
+          filtered[job] = filteredPeople;
+        }
+      });
+      return filtered;
+    }
+  };
+
   // Get cast array or crew grouped by job
   const getCategoryData = (category) => {
     if (category === "Cast") return movieData.cast || [];
@@ -91,6 +131,22 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
       return movieData.crew[category];
     }
     return [];
+  };
+
+  // Get filtered data based on search
+  const getFilteredData = (category) => {
+    const data = getCategoryData(category);
+    return filterBySearch(data, searchQuery);
+  };
+
+  // Count total people in filtered results
+  const getFilteredCount = (category) => {
+    const filtered = getFilteredData(category);
+    if (category === "Cast") {
+      return filtered.length;
+    } else {
+      return Object.values(filtered).reduce((acc, arr) => acc + arr.length, 0);
+    }
   };
 
   const handleCategoryChange = (category) => {
@@ -101,7 +157,23 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
     setSelectedCategory(category);
   };
 
-  const currentData = getCategoryData(selectedCategory);
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+    if (contentRef.current) {
+      contentRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const clearSearch = () => {
+    setSearchQuery("");
+    searchInputRef.current?.focus();
+  };
+
+  const currentData = getFilteredData(selectedCategory);
+  const hasResults =
+    selectedCategory === "Cast"
+      ? currentData.length > 0
+      : Object.keys(currentData).length > 0;
 
   return (
     <AnimatePresence>
@@ -156,6 +228,30 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
                   Full Cast & Crew
                 </h3>
               </div>
+
+              {/* Search Bar */}
+              <div className="relative flex-1 max-w-[400px] mx-6">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-[var(--text-secondary)]" />
+                  <input
+                    ref={searchInputRef}
+                    type="text"
+                    placeholder="Search cast & crew..."
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                    className="w-full pl-10 pr-10 py-2.5 bg-[var(--bg-trans-15)] border border-[var(--border-secondary)] rounded-lg text-[var(--text-primary)] placeholder-[var(--text-secondary)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-main)]/20 focus:border-[var(--accent-main)] transition-all duration-200"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={clearSearch}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-200"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+              </div>
+
               <button
                 className="w-[42px] h-[42px] rounded-[10px] flex items-center justify-center text-[var(--text-primary)] p-2 flex-shrink-0 hover:cursor-pointer hover:bg-[var(--bg-button-hover)] transition-all duration-200"
                 onClick={onClose}
@@ -173,13 +269,15 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
                     {categories.map((cat, index) => {
                       const isSelected = selectedCategory === cat;
                       const Icon = getCategoryIcon(cat);
-                      const count =
-                        cat === "Cast"
-                          ? getCategoryData("Cast").length
-                          : Object.values(movieData.crew?.[cat] || {}).reduce(
-                              (acc, arr) => acc + arr.length,
-                              0
-                            );
+                      const count = searchQuery
+                        ? getFilteredCount(cat)
+                        : cat === "Cast"
+                        ? getCategoryData("Cast").length
+                        : Object.values(movieData.crew?.[cat] || {}).reduce(
+                            (acc, arr) => acc + arr.length,
+                            0
+                          );
+
                       return (
                         <motion.button
                           key={cat}
@@ -243,20 +341,24 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
                 <div className="px-5 py-4 border-t border-[var(--border-secondary)]">
                   <div className="text-xs text-[var(--text-secondary)] space-y-2">
                     <div className="flex justify-between items-center">
-                      <span>Total People:</span>
+                      <span>{searchQuery ? "Filtered:" : "Total People:"}</span>
                       <span className="font-medium text-[var(--text-primary)]">
-                        {categories.reduce((acc, cat) => {
-                          if (cat === "Cast") {
-                            return acc + (movieData.cast?.length || 0);
-                          }
-                          return (
-                            acc +
-                            Object.values(movieData.crew?.[cat] || {}).reduce(
-                              (s, arr) => s + (arr?.length || 0),
+                        {searchQuery
+                          ? categories.reduce(
+                              (acc, cat) => acc + getFilteredCount(cat),
                               0
                             )
-                          );
-                        }, 0)}
+                          : categories.reduce((acc, cat) => {
+                              if (cat === "Cast") {
+                                return acc + (movieData.cast?.length || 0);
+                              }
+                              return (
+                                acc +
+                                Object.values(
+                                  movieData.crew?.[cat] || {}
+                                ).reduce((s, arr) => s + (arr?.length || 0), 0)
+                              );
+                            }, 0)}
                       </span>
                     </div>
                     <div className="flex justify-between items-center">
@@ -276,13 +378,31 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
               >
                 <AnimatePresence mode="wait">
                   <motion.div
-                    key={selectedCategory}
+                    key={`${selectedCategory}-${searchQuery}`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
                   >
-                    {selectedCategory === "Cast" ? (
+                    {!hasResults && searchQuery ? (
+                      // No results message
+                      <div className="flex flex-col items-center justify-center h-[400px] text-center">
+                        <Search className="w-16 h-16 text-[var(--text-secondary)] mb-4" />
+                        <h3 className="text-lg font-medium text-[var(--text-primary)] mb-2">
+                          No results found
+                        </h3>
+                        <p className="text-[var(--text-secondary)] mb-4">
+                          No cast or crew members match "{searchQuery}" in{" "}
+                          {selectedCategory}
+                        </p>
+                        <button
+                          onClick={clearSearch}
+                          className="px-4 py-2 bg-[var(--accent-main)] text-white rounded-lg hover:bg-[var(--accent-main)]/90 transition-colors duration-200"
+                        >
+                          Clear search
+                        </button>
+                      </div>
+                    ) : selectedCategory === "Cast" ? (
                       // Cast grid with fallback icon for missing images
                       <div
                         className="grid gap-6 justify-center"
@@ -407,7 +527,6 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
                                     <p className="text-[var(--text-primary)] text-[15px] font-medium break-words w-full text-left group-hover:text-[var(--accent-main)] group-hover:underline transition-colors duration-200">
                                       {person.name}
                                     </p>
-                                    {/* job title removed */}
                                   </motion.div>
                                 ))}
                               </div>
