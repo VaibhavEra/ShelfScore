@@ -25,7 +25,7 @@ export default function ImageBlock() {
     return Object.values(data)
       .filter(Array.isArray)
       .flat()
-      .filter((photo) => photo && photo.url); // CHANGED: file_path to url
+      .filter((photo) => photo && photo.file_path); // updated: filter by file_path presence
   };
 
   const allPhotos = getAllPhotos();
@@ -34,8 +34,10 @@ export default function ImageBlock() {
   const maxDisplay = 15;
   const displayPhotos = allPhotos.slice(startIndex, startIndex + maxDisplay);
 
-  // Helper function to get image URL - UPDATED
-  const getImageUrl = (photo) => photo.url;
+  // Helper function to get image URL - builds full TMDB path from file_path
+  const TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
+  const getImageUrl = (photo, size = "w500") =>
+    `${TMDB_IMAGE_BASE_URL}${size}${photo.file_path}`;
 
   // Handle photo click to open full-screen photo viewer
   const handlePhotoClick = (photo) => {
@@ -161,24 +163,22 @@ export default function ImageBlock() {
           <button
             onClick={() => scroll("left")}
             disabled={!canScrollLeft || isScrolling}
-            className={`w-[36px] h-[36px] flex items-center justify-center rounded-full transition-colors duration-200 
-                  ${
-                    canScrollLeft && !isScrolling
-                      ? "bg-[var(--bg-trans-15)] text-[var(--text-primary)] hover:bg-[var(--bg-trans-60)] cursor-pointer"
-                      : "bg-[var(--bg-trans-5)] text-[var(--text-secondary)] cursor-not-allowed"
-                  }`}
+            className={`w-[36px] h-[36px] flex items-center justify-center rounded-full transition-colors duration-200 ${
+              canScrollLeft && !isScrolling
+                ? "bg-[var(--bg-trans-15)] text-[var(--text-primary)] hover:bg-[var(--bg-trans-60)] cursor-pointer"
+                : "bg-[var(--bg-trans-5)] text-[var(--text-secondary)] cursor-not-allowed"
+            }`}
           >
             <ChevronLeft size={20} />
           </button>
           <button
             onClick={() => scroll("right")}
             disabled={!canScrollRight || isScrolling}
-            className={`w-[36px] h-[36px] flex items-center justify-center rounded-full transition-colors duration-200 
-                  ${
-                    canScrollRight && !isScrolling
-                      ? "bg-[var(--bg-trans-15)] text-[var(--text-primary)] hover:bg-[var(--bg-trans-60)] cursor-pointer"
-                      : "bg-[var(--bg-trans-5)] text-[var(--text-secondary)] cursor-not-allowed"
-                  }`}
+            className={`w-[36px] h-[36px] flex items-center justify-center rounded-full transition-colors duration-200 ${
+              canScrollRight && !isScrolling
+                ? "bg-[var(--bg-trans-15)] text-[var(--text-primary)] hover:bg-[var(--bg-trans-60)] cursor-pointer"
+                : "bg-[var(--bg-trans-5)] text-[var(--text-secondary)] cursor-not-allowed"
+            }`}
           >
             <ChevronRight size={20} />
           </button>
@@ -193,7 +193,7 @@ export default function ImageBlock() {
         >
           {displayPhotos.map((photo, index) => (
             <div
-              key={photo.url} // CHANGED: file_path to url
+              key={photo.file_path} // updated to file_path key
               className="flex-shrink-0 w-[246px] h-[246px] snap-start cursor-pointer group overflow-hidden rounded-[10px] shadow-lg"
               onClick={() => handlePhotoClick(photo)}
             >
@@ -209,7 +209,7 @@ export default function ImageBlock() {
           ))}
         </div>
 
-        {/* Fade Overlay - Visible until scrolled all the way to the right */}
+        {/* Fade Overlay */}
         <div
           className={`absolute top-0 right-0 w-[120px] h-full pointer-events-none transition-opacity duration-300 ease-in-out bg-[var(--bg-primary)] ${
             showFadeOverlay ? "opacity-100" : "opacity-0"

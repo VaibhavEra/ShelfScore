@@ -340,8 +340,9 @@ export default function PhotosModal({ isOpen, onClose, movie }) {
   const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
   const currentPhotos = filteredPhotos.slice(startIndex, endIndex);
 
-  // Updated getImageUrl to return photo.url directly
-  const getImageUrl = (photo) => photo.url;
+  // Updated getImageUrl to build URL from file_path per new API response
+  const getImageUrl = (photo, size = "w500") =>
+    `https://image.tmdb.org/t/p/${size}${photo.file_path}`;
 
   const getPageNumbers = () => {
     if (totalPages <= 7) {
@@ -601,7 +602,7 @@ export default function PhotosModal({ isOpen, onClose, movie }) {
                     >
                       {currentPhotos.map((photo, idx) => (
                         <motion.div
-                          key={`${photo.url}-${idx}`}
+                          key={`${photo.file_path}-${idx}`}
                           className="cursor-pointer group"
                           initial={{ opacity: 0, scale: 0.9 }}
                           animate={{ opacity: 1, scale: 1 }}

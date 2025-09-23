@@ -12,8 +12,11 @@ export default function FullScreenPhotoModal({ photo, onClose }) {
     };
   }, []);
 
-  // Updated getImageUrl to just return the complete URL
-  const getImageUrl = (photo) => photo.url;
+  const TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
+
+  // Updated getImageUrl to construct full URL using file_path
+  const getImageUrl = (photo, size = "original") =>
+    `${TMDB_IMAGE_BASE_URL}${size}${photo.file_path}`;
 
   return (
     <AnimatePresence>
@@ -43,7 +46,7 @@ export default function FullScreenPhotoModal({ photo, onClose }) {
 
         {/* Full photo */}
         <motion.img
-          src={getImageUrl(photo)}
+          src={getImageUrl(photo, "original")}
           alt="Photo"
           className="max-w-full max-h-full object-contain"
           style={{
@@ -56,8 +59,8 @@ export default function FullScreenPhotoModal({ photo, onClose }) {
           transition={{ duration: 0.5, ease: "easeOut" }}
           onClick={(e) => e.stopPropagation()}
           onError={(e) => {
-            // Since photo.url is already the full URL, we'll keep it as fallback
-            e.target.src = photo.url;
+            e.target.src = getImageUrl(photo, "w500");
+            // In case fallback is needed, but usually photo.url no longer applies with new API
           }}
         />
       </motion.div>

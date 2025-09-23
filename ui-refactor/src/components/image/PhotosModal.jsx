@@ -94,7 +94,7 @@ export default function PhotosModal({
         const categoryData = data[cat];
         return (
           Array.isArray(categoryData) &&
-          categoryData.some((p) => p.url === initialPhoto.url)
+          categoryData.some((p) => p.file_path === initialPhoto.file_path)
         );
       });
 
@@ -132,7 +132,7 @@ export default function PhotosModal({
       const categoryData = data[cat];
       return (
         Array.isArray(categoryData) &&
-        categoryData.some((p) => p.url === photo.url)
+        categoryData.some((p) => p.file_path === photo.file_path)
       );
     });
 
@@ -379,8 +379,9 @@ export default function PhotosModal({
   const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
   const currentPhotos = filteredPhotos.slice(startIndex, endIndex);
 
-  // Updated getImageUrl to just return the complete URL
-  const getImageUrl = (photo) => photo.url;
+  const TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
+  const getImageUrl = (photo, size = "w500") =>
+    `${TMDB_IMAGE_BASE_URL}${size}${photo.file_path}`;
 
   const getPageNumbers = () => {
     if (totalPages <= 7) {
@@ -421,7 +422,7 @@ export default function PhotosModal({
       const categoryData = data[cat];
       return (
         Array.isArray(categoryData) &&
-        categoryData.some((p) => p.url === photo.url)
+        categoryData.some((p) => p.file_path === photo.file_path)
       );
     });
   };
@@ -671,7 +672,7 @@ export default function PhotosModal({
                         >
                           {currentPhotos.map((photo, idx) => (
                             <motion.div
-                              key={`${photo.url}-${idx}`}
+                              key={`${photo.file_path}-${idx}`}
                               className="cursor-pointer group"
                               initial={{ opacity: 0, scale: 0.9 }}
                               animate={{ opacity: 1, scale: 1 }}

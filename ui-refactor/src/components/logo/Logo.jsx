@@ -2,6 +2,8 @@ import React from "react";
 import { movieData } from "../../data/movieDetails";
 import { data } from "../../data/photosdata";
 
+const TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
+
 const MovieLogo = () => {
   // Get the primary language from movie data
   const primaryLanguage = movieData?.primary?.primary_language;
@@ -26,7 +28,7 @@ const MovieLogo = () => {
     <div className="w-[1219px] flex justify-center items-center p-10 box-border">
       <div className="flex justify-center items-center max-w-full">
         <img
-          src={matchingLogo.url}
+          src={`${TMDB_IMAGE_BASE_URL}original${matchingLogo.file_path}`}
           alt={`${movieData?.primary?.title} logo`}
           className="max-w-full max-h-[200px] h-auto object-contain"
         />
