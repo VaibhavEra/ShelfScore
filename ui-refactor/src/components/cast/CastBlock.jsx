@@ -23,6 +23,12 @@ function flattenCredits(creditsObj) {
   return creditsList;
 }
 
+// Helper function to construct TMDB image URL
+function getTMDBImageUrl(profilePath, size = "w185") {
+  if (!profilePath) return null;
+  return `https://image.tmdb.org/t/p/${size}${profilePath}`;
+}
+
 export default function CastBlock() {
   const scrollRef = useRef(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -175,9 +181,9 @@ export default function CastBlock() {
               className="flex-shrink-0 w-[181px] flex flex-col cursor-pointer group snap-start"
             >
               <div className="w-[181px] h-[181px] rounded-[20px] flex items-center justify-center overflow-hidden bg-[var(--bg-trans-15)]">
-                {person.profile_url ? (
+                {person.profile_path ? (
                   <img
-                    src={person.profile_url}
+                    src={getTMDBImageUrl(person.profile_path, "w185")}
                     alt={person.name}
                     className="w-full h-full object-cover"
                     onError={(e) => {

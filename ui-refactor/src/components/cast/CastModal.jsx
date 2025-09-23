@@ -18,6 +18,12 @@ import {
 } from "lucide-react";
 import { movieData } from "../../data/castandcrewdata";
 
+// Helper function to construct TMDB image URL
+function getTMDBImageUrl(profilePath, size = "w185") {
+  if (!profilePath) return null;
+  return `https://image.tmdb.org/t/p/${size}${profilePath}`;
+}
+
 export default function CastAndCrewModal({ isOpen, onClose, movie }) {
   const [selectedCategory, setSelectedCategory] = useState("Cast");
   const contentRef = useRef(null);
@@ -293,14 +299,26 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
                             transition={{ duration: 0.3, delay: idx * 0.05 }}
                           >
                             <div className="w-[170px] h-[170px] rounded-[20px] flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-200 bg-[var(--bg-trans-15)]">
-                              {person.profile_url ? (
+                              {person.profile_path ? (
                                 <img
-                                  src={person.profile_url}
+                                  src={getTMDBImageUrl(
+                                    person.profile_path,
+                                    "w185"
+                                  )}
                                   alt={person.name}
                                   className="w-full h-full object-cover"
                                   onError={(e) => {
                                     e.target.onerror = null;
-                                    e.target.src = "/api/placeholder/170/170";
+                                    e.target.replaceWith(
+                                      (() => {
+                                        const fallbackDiv =
+                                          document.createElement("div");
+                                        fallbackDiv.className =
+                                          "w-full h-full flex items-center justify-center";
+                                        fallbackDiv.innerHTML = `<svg class="w-20 h-20 text-[var(--text-secondary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>`;
+                                        return fallbackDiv;
+                                      })()
+                                    );
                                   }}
                                 />
                               ) : (
@@ -345,15 +363,34 @@ export default function CastAndCrewModal({ isOpen, onClose, movie }) {
                                     }}
                                   >
                                     <div className="w-[170px] h-[170px] rounded-[20px] flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-200 bg-[var(--bg-trans-15)]">
-                                      {person.profile_url ? (
+                                      {person.profile_path ? (
                                         <img
-                                          src={person.profile_url}
+                                          src={getTMDBImageUrl(
+                                            person.profile_path,
+                                            "w185"
+                                          )}
                                           alt={person.name}
                                           className="w-full h-full object-cover"
                                           onError={(e) => {
                                             e.target.onerror = null;
-                                            e.target.src =
-                                              "/api/placeholder/170/170";
+                                            e.target.replaceWith(
+                                              (() => {
+                                                const fallbackDiv =
+                                                  document.createElement("div");
+                                                fallbackDiv.className =
+                                                  "w-full h-full flex items-center justify-center";
+                                                const Icon =
+                                                  getCategoryIcon(
+                                                    selectedCategory
+                                                  );
+                                                fallbackDiv.innerHTML = `<svg class="w-20 h-20 text-[var(--text-secondary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">${
+                                                  Icon === UserRound
+                                                    ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>'
+                                                    : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>'
+                                                }</svg>`;
+                                                return fallbackDiv;
+                                              })()
+                                            );
                                           }}
                                         />
                                       ) : (
