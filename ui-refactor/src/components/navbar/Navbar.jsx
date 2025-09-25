@@ -11,7 +11,7 @@ import {
 const Navbar = () => {
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-40 bg-[var(--bg-nav)] border-b border-white/10"
+      className="absolute top-0 left-0 right-0 z-1 bg-[var(--bg-nav)] border-b border-white/10"
       style={{ height: "73px" }}
     >
       <div className="max-w-[1400px] mx-auto px-8 h-full flex items-center justify-center">
