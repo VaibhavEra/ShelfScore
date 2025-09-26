@@ -324,7 +324,7 @@ export default function ReleaseDatesBlock({ releaseData }) {
           />
         </div>
 
-        {/* Release Timeline with filter animation */}
+        {/* Release Timeline with filter animation and scrollable content */}
         {!showCountrySelector && (
           <div className="mt-[30px] relative">
             <div
@@ -338,42 +338,45 @@ export default function ReleaseDatesBlock({ releaseData }) {
               }`}
             >
               {Object.keys(processedReleases).length > 0 ? (
-                <div className="space-y-[12px]">
-                  {sortMode === "date" ? (
-                    // Date-sorted view
-                    Object.entries(processedReleases).map(
-                      ([date, releases]) => (
-                        <ReleaseDateGroup
-                          key={date}
-                          date={date}
-                          releases={releases}
-                          isExpanded={
-                            viewMode === "expanded"
-                              ? true
-                              : expandedDates.has(date)
-                          }
-                          onToggle={() =>
-                            viewMode === "collapsible" &&
-                            toggleDateExpansion(date)
-                          }
-                          collapsible={viewMode === "collapsible"}
-                        />
-                      )
-                    )
-                  ) : (
-                    // Country-sorted view - Flex wrap the country groups themselves
-                    <div className="flex flex-wrap gap-[12px]">
-                      {Object.entries(processedReleases).map(
-                        ([countryCode, releases]) => (
-                          <ReleaseCountryGroup
-                            key={countryCode}
-                            countryCode={countryCode}
+                /* Scrollable Container */
+                <div className="max-h-[600px] overflow-y-auto custom-scroll">
+                  <div className="space-y-[12px] pr-[8px]">
+                    {sortMode === "date" ? (
+                      // Date-sorted view
+                      Object.entries(processedReleases).map(
+                        ([date, releases]) => (
+                          <ReleaseDateGroup
+                            key={date}
+                            date={date}
                             releases={releases}
+                            isExpanded={
+                              viewMode === "expanded"
+                                ? true
+                                : expandedDates.has(date)
+                            }
+                            onToggle={() =>
+                              viewMode === "collapsible" &&
+                              toggleDateExpansion(date)
+                            }
+                            collapsible={viewMode === "collapsible"}
                           />
                         )
-                      )}
-                    </div>
-                  )}
+                      )
+                    ) : (
+                      // Country-sorted view - Flex wrap the country groups themselves
+                      <div className="flex flex-wrap gap-[12px]">
+                        {Object.entries(processedReleases).map(
+                          ([countryCode, releases]) => (
+                            <ReleaseCountryGroup
+                              key={countryCode}
+                              countryCode={countryCode}
+                              releases={releases}
+                            />
+                          )
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
               ) : (
                 <div className="text-center py-[60px]">
